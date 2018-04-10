@@ -1,0 +1,91 @@
+
+
+ДОКУМЕНТАЦИЯ ПО СОЗДАНИЮ ПРОЕКТА НА ЛОКАЛЬНОМ КОМПЬЮТЕРЕ.
+ПЕРВЫЕ ШАГИ. (python -V 3.5)
+=======================================================================================
+
+
+
+1. Создание виртуального окружения. Windows.
+---------------------------------------------------------------------------------------
+pip install virtualenv 				- Установка утилиты
+cd /D E:/ 							- Перейти в раздел (Е)
+virtualenv nameproject_venv 		- Создания виртуального окружения в дериктории/папке E:
+nameproject_venv\Scripts\activate 	- Активация виртуального окружения (\deactivate - деактивация)
+
+
+
+2. Установка стандартного приложения Django. 
+----------------------------------------------------------------------------------------
+nameproject_venv 							- перейти в созданное вертуальное окружение
+	В консоле должно быть примерно следующее `(nameproject_venv) e:\nameproject_venv>`
+pip install Django							- Установка основного фрэймворка Django
+django-admin startproject nameproject_app	- Создать проект (c префиксом _app)
+cd nameproject_app							- Перейти в папку с созданным проектом
+python manage.py migrate					- Создать таблицы(дефолтные) в БД
+python manage.py runserver					- Запуск приложения (проверка)
+
+
+
+3. Настройка движка PYAP.
+----------------------------------------------------------------------------------------
+Перейти в папку проекта (nameproject_app).
+Копируем все, кроме (boxarr, db.sqlite3, manage.py)
+Перейти в папку `nameproject_app/nameproject_app`
+Копировать основные настройки движка (папка pyap).
+Перенести папку static из pyap в nameproject_app/nameproject_app 
+Заменить созданные файлы urls.py
+Открыть settings.py нашего проекта и удалить все кроме: SECRET_KEY, ROOT_URLCONF, WSGI_APPLICATION
+Открыть settings.py движка(PYAP) и скопировать все содержимое, кроме: SECRET_KEY, ROOT_URLCONF, WSGI_APPLICATION
+	```nameproject_app - папка проекта со статикой
+	STATICFILES_DIRS = (
+    	os.path.join(BASE_DIR, "nameproject_app", "static"),
+	)
+
+
+4. Установка движка PYAP.
+----------------------------------------------------------------------------------------
+pip install -r requirements.txt --no-index 		- Установить нужные библиотеки 
+	Если вылетает ошибка - устанавливаем в ручную
+	pip install django-ckeditor django-mptt pillow transliterate sorl-thumbnail pytz
+python manage.py runserver - 					- Проверяем работоспособность.
+Должны вылезти ошибки о несуществующих таблицах.
+
+АВТОРАЗВЕРТЫВАНИЕ БАЗЫ ДАННЫХ 
+--------------------------------
+Остановить сервер `Ctrl + C` и в консоли набираем:
+python manage.py migrate 				- создать все необходимые таблицы в базе, указанной в settings.py
+python manage.py makemigrations			- внести изменения в ваши модели
+python manage.py createsuperuser		- создать супер пользователя (ответить на вопросы в консоле)(login: admin | pass: adminpyap )
+
+ЗАПОЛНЕНИЕ БАЗЫ ДАННЫХ
+--------------------------------
+python manage.py shell - входим в интерактивную консоль, чтобы начать заполнять дефолтные значения
+>>> # интерактивно
+from advertising import default_data as advertising_dd 
+from catalog import default_data as catalog_dd
+from page import default_data as page_dd
+from product import default_data as product_dd
+from site_info import default_data as site_info_dd 
+from settings_template import default_data as settings_template_dd 
+from menu import default_data as menu_dd
+
+advertising_dd.added_default()
+catalog_dd.added_default()
+page_dd.added_default()
+product_dd.added_default()
+site_info_dd.added_default()
+settings_template_dd.added_default()
+menu_dd.added_default()
+# -------- END --------
+Нажать на клавиатуре `Enter`, потом `Ctrl + C`
+python manage.py runserver - Проверить установку (http://localhost:8000)
+
+
+НА ЭТОМ ЭТАПЕ ДОЛЖЕН РАЗВЕРНУТЬСЯ СТАНДАРТНЫЙ ПРОЕКТ `PyAp`
+
+Установка успешно завершена!
+
+/////////////////////
+*
+python manage.py makemigrations thumbnail

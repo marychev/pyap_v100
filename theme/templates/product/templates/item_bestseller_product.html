@@ -1,0 +1,75 @@
+{% load static %}
+{% load fb_versions %}
+
+{% if objects %}
+
+<div id="hot">
+    <div class="container">
+        <div class="box">
+            <h2>{% if title %}{{ title }}{% endif %}{{ object.title }}</h2>
+        </div>
+        <div class="product-slider">
+            {% with objects=objects %}
+                {% for product in objects %}
+                    <div class="item">
+                        <div class="product">
+                            <div class="flip-container">
+                                <div class="flipper">
+                                    <div class="front">
+                                        <a href="{{ product.get_absolute_url }}">
+                                            <img class="img-responsive" src="{% version product.get_main_image.image 'medium' %}" title="{{ product.get_main_image.image.image_title }}" alt="{{ product.title }}">
+                                        </a>
+                                    </div>
+                                    <div class="back">
+                                        <a href="{{ product.get_absolute_url }}">
+                                            <img class="img-responsive" src="{% version product.get_main_image.image 'medium' %}" title="{{ product.get_main_image.image.image_title }}" alt="{{ product.title }}">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="{{ product.get_absolute_url }}" class="invisible">
+                                <img src="{% version product.get_main_image.image 'medium' %}" alt="" class="img-responsive">
+                            </a>
+                            <div class="text">
+                                <span>{{ product.title }}<br>
+                                {% if product.articul %}<a href="{{ product.get_absolute_url }}" class='small text-muted'>{{ product.articul }}</a><br>{% endif %}
+                                {% if product.get_price %}
+                                    {% include 'product/templates/product_price.html' with obj=product %}
+                                {% endif %}
+                            </div>
+                            <!-- /.text -->
+
+                            {% if product.get_price_discount %}
+                            <div class="ribbon sale">
+                                <div class="theribbon">%</div>
+                                <div class="ribbon-background"></div>
+                            </div>
+                            {% endif %}
+
+                            {% if product.is_new %}
+                            <div class="ribbon new">
+                                <div class="theribbon">NEW</div>
+                                <div class="ribbon-background"></div>
+                            </div>
+                            {% endif %}
+                            {% if product.is_bestseller %}
+                            <div class="ribbon gift">
+                                <div class="theribbon">TOP</div>
+                                <div class="ribbon-background"></div>
+                            </div>
+                            {% endif %}
+
+                            {% if product.get_price %}
+                                <a rel="nofollow" class='jsAddToCart btn btn-sm btn-block btn-primary' data-product-id="{{ product.get_main_item.id }}" data-is-catalog="true"><i class="fa fa-shopping-cart"></i>В корзину</a>
+                                <div id="ajaxError"></div>
+                            {% endif %}
+                        </div>
+                        <!-- /.product -->
+                    </div>
+                {% endfor %}
+            {% endwith %}
+        </div>
+    </div>
+</div>
+{% endif %}
+

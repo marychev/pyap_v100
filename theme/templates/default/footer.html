@@ -1,0 +1,90 @@
+<footer id="footer">
+    <div id="footer" data-animate="fadeInUp">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-6">
+                    {% if footer.page.exists %}
+                        <h4>Популярные страницы</h4>
+                        <ul>
+                        {% for p in footer.page.all %}
+                            <li>
+                                <a href="{% url 'page:page-detail' slug=p.slug %}" title="{{ p.title }}" rel="nofollow">{{ p.title }}</a>
+                            </li>
+                        {% endfor %}
+                        </ul>
+                        <hr>
+                    {% endif %}
+
+                    {% if footer.blogs.exists %}
+                        <h4>Популярные блоги</h4>
+                        <ul>
+                        {% for b in footer.blogs.all %}
+                            <li>
+                                <a href="{{ b.get_absolute_url }}" title="{{ b.title }}" rel="nofollow">{{ b.title }}</a>
+                            </li>
+                        {% endfor %}
+                        </ul>
+                        <hr class="hidden-md hidden-lg hidden-sm">
+                    {% endif %}
+
+                    {% if footer.get_list_link %}
+                        <h4>Быстрые ссылкии</h4>
+                        <ul>
+                        {% for ll in footer.get_list_link %}
+                            <li>
+                                <a class='{{ ll.type_link }}_link' href="{{ ll.url }}" title="{{ ll.title }}"
+                                {% if 'T' in ll.type_link %} target="_blank" {% endif %}>{{ ll.title }}</a>
+                            </li>
+                        {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+
+                <div class="col-md-3 col-sm-6">
+                    {% if footer.catalog.exists %}
+                        <h4>Популярные каталоги</h4>
+                        <ul>
+                            {% for b in footer.catalog.all %}
+                                <li>
+                                    <a href="{{ b.get_absolute_url }}" title="{{ b.title }}" rel="nofollow">{{ b.title }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                        <hr class="hidden-md hidden-lg hidden-sm">
+                    {% endif %}
+
+                    {% if footer.galleries.exists %}
+                        <h4>Популярные галереи</h4>
+                        <ul>
+                            {% for b in footer.galleries.all %}
+                                <li>
+                                    <a href="{{ b.get_absolute_url }}" title="{{ b.title }}" rel="nofollow">{{ b.title }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                        <hr class="hidden-md hidden-lg hidden-sm">
+                    {% endif %}
+                </div>
+
+                {% if footer.text_info %}
+                    <div class="col-md-3 col-sm-6">
+                        <h4>{{ footer.text_info.title }}</h4>
+                        <h2></h2>
+                        {{ footer.text_info.html|safe }}
+                        <hr class="hidden-md hidden-lg">
+                    </div>
+                {% endif %}
+
+                {% include 'site_info/templates/social_networs.html' with type='html_link' %}
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container -->
+    </div>
+</footer>
+
+<p class="text-right">
+    <a href="/">{{ setting_template.site.name }}<span>© {% now 'Y' %} Все права защищены.</span></a><br>
+    <small class="pull-right"><a href="/">© [pYAp] ``Создан на движке``</a></small>
+</p>
+<div id="toTop">&uarr;</div>

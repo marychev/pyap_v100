@@ -1,0 +1,57 @@
+.menu-hook-hover:hover ul {
+    display:block !important;}
+#header .tabs ul ul li {
+    width: 200px !important;}
+
+.tree-node.children{
+    float: right;
+}
+
+select, textarea, .form-row input, td input {
+    border: 1px solid #eee;
+    background: #f9feff6b;
+    font-weight: 300;
+    letter-spacing: .5px;
+    font-size: 13.5px;
+}
+#content #content-main .module,
+input[type=text], input[type=password], input[type=email], input[type=url], input[type=number],
+textarea, select, .vTextField, .button, input[type=submit], input[type=button], .submit-row input, a.button
+.submit-row a.deletelink, .submit-row, .submit-row a.deletelink, .selector-available h2, .selector-chosen h2 {
+    border-radius: 0!important;}
+
+/* FOR JS */
+.jsMinusVal{
+    color: red;}
+
+.submit-row a.deletelink{
+    border-radius: 30px;
+}
+#toBottom, #toTop{
+    background: #888;
+    padding: 0 7px;
+    position: fixed;
+    left: 3px;
+    border: 1px solid;
+    cursor: pointer;
+    color: #fff;
+    font-size: 20px;
+    z-index: 100;
+}
+#toBottom {
+    top: 202px;
+}
+#toTop {
+    display: none;
+    bottom: 3px;
+    left: 3px;
+}
+
+#changelist table input{
+    max-width: 100px;
+}
+
+#secondary-nav ul li.active a {
+    color: #2f77ff;
+    text-decoration: underline;
+}

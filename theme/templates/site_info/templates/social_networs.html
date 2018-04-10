@@ -1,0 +1,38 @@
+{% load fb_versions  %}
+
+
+{% if social_network %}
+<div class="col-md-3 col-sm-6">
+    <h4>Мы в соцсетях</h4>
+    <p class='small text-muted'>Присоединяйтесь к нам в социальных сетях :)</p>
+{#    <p class="social">#}
+{#        <a href="#" class="facebook external" data-animate-hover="shake"><i class="fa fa-facebook"></i></a>#}
+{#        <a href="#" class="twitter external" data-animate-hover="shake"><i class="fa fa-twitter"></i></a>#}
+{#        <a href="#" class="instagram external" data-animate-hover="shake"><i class="fa fa-instagram"></i></a>#}
+{#        <a href="#" class="gplus external" data-animate-hover="shake"><i class="fa fa-google-plus"></i></a>#}
+{#        <a href="#" class="email external" data-animate-hover="shake"><i class="fa fa-envelope"></i></a>#}
+{#    </p>#}
+
+    {% if 'html_link' in type %}
+{#        {% with html_links=social_network.first.get_html_links %}#}
+{#            {% for link in html_links %}#}
+{#                <span title="{{ link.title }}">{{ link.html_link|safe }}</span>#}
+{#            {% endfor %}#}
+{#        {% endwith %}#}
+        <p class="social">
+            {% with objects=social_network %}
+                {% for obj in objects %}
+                    <a href="{{ obj.url }}" data-toggle="tooltip" target="_blank" data-placement="top" title="{{ obj.image_title }}" class="external" data-animate-hover="shake">
+                        {% if obj.get_main_image %}
+                            <img height="35" width="35" class='img-circle' src="{% version obj.get_main_image 'thumbnail' %}">
+                        {% else %}
+                            {{ obj.html_link|safe }}
+                        {% endif %}
+                    </a>
+                {% endfor %}
+            {% endwith %}
+        </p>
+    {% endif %}
+</div>
+{% endif %}
+

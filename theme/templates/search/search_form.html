@@ -1,0 +1,10 @@
+<div class="collapse clearfix" id="search">
+    <form id="searchform" action="{% url 'search:search' %}" method="get" accept-charset="utf-8" class="navbar-form" role="search">
+        <div class="input-group">
+            <input id="searchbox" name="q" placeholder="Поиск" class="form-control" {% if q %}value="{{ q }}"{% endif %}>
+            <span class="input-group-btn">
+                <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+            </span>
+        </div>
+    </form>
+</div>

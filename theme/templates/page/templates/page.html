@@ -1,0 +1,51 @@
+{% extends 'main.html' %}
+{% load staticfiles %}
+{% load fb_versions %}
+
+{% block title %}{{ object.seo_title }}{% endblock %}
+{% block description %}{{ object.seo_description }}{% endblock %}
+{% block keywords %}{{ object.seo_keywors }}{% endblock %}
+
+
+{% block breadcrumbs %}{% include 'default/breadcrumbs.html' with obj=object %}{% endblock %}
+{% block leftbar %}{% include 'default/leftbar.html' %}{% endblock %}
+
+{% block main %}
+{#    {% if object.get_main_image %}#}
+{#        <div style="background-image: url({% version object.get_main_image.image 'max' %});"></div>#}
+{#    {% endif %}#}
+
+    <div class="col-md-9">
+
+     {% for img in object.get_images %}
+         <img src="{% version img.image 'max' %}" alt="{{ img.title }}" title="{{ img.image_title }}" class="img-responsive">
+     {% endfor %}
+
+        <div class="box" id="text-page">
+            <article id="post-{{ object.id }}" class="article no-margin even post-{{ object.id }} post type-post">
+                <h1>{{ object.title }}</h1>
+                {% if object.description %}<blockquote>{{ object.description }}</blockquote>{% endif %}
+                <div class="content">{{ object.html|safe }}</div>
+                <time class="small pull-right text-muted" datetime="{{ object.created }}">{{ object.created }}</time>
+            </article>
+        </div>
+    </div>
+    <!-- /.col-md-9 -->
+
+    {% if object.scripts %}{{ object.scripts|safe }}{% endif %}
+
+    {% if object.is_allow_comments %}
+        <div>
+            <p>Оставьте свой коментарий или задайте вопрос</p>
+            <h4>Оставить комментарий</h4>
+            <form method="post" action="{% url 'page:page_comment' object.id %}">{% csrf_token %}
+                <div id="form-messages">{{ comment_form.errors }}</div>
+                <div>{{ comment_form }}</div>
+                <input type="submit" value="Оставить коментарий">
+            </form>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block additional_js %}{% endblock %}
+

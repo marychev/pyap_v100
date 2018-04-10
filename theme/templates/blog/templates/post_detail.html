@@ -1,0 +1,50 @@
+{% extends 'main.html' %}
+{% load staticfiles %}
+{% load url_handler %}
+
+{% load fb_versions %}
+
+{% block title %}{{ post.seo_title }}{% endblock %}
+{% block description %}{{ post.seo_description }}{% endblock %}
+{% block keywords %}{{ post.seo_keywords }}{% endblock %}
+
+{% block breadcrumbs %}{% include 'default/breadcrumbs.html' with tree=post.blog.get_family obj=post %}{% endblock %}
+{% block leftbar %}{% include 'default/leftbar.html' %}{% endblock %}
+
+
+{% block main %}
+
+    <div class="col-md-9">
+        {% for img in post.get_images %}
+            <img src="{% version img.image 'max' %}" alt="{{ img.title }}" title="{{ img.image_title }}" class="img-responsive">
+        {% endfor %}
+
+        <div class="box" id="text-page">
+            <article id="post-{{ post.id }}" class="article no-margin even post-{{ post.id }} post type-post">
+                <h1>{{ post.title }}</h1>
+                {% if post.description %}<blockquote>{{ post.description }}</blockquote>{% endif %}
+                <div class="content">{{ post.html|safe }}</div>
+                <time class="small pull-right text-muted" datetime="{{ post.created }}">{{ post.created }}</time>
+            </article>
+
+            <div>
+                <small>Опубликованно: {{ post.created|date:'d/m/Y' }}</small><br>
+                {% if post.author %}
+                    <small>Автор: {{ post.author.get_short_name }}</small><br>
+                    <small>Коментарии: {{ post.comment_count }} шт.</small>
+                {% endif %}
+            </div>
+
+            {% include 'default/next_prev.html' with type='post' %}
+
+    {% if post.is_allow_comments %}
+        {% include 'default/comment_list.html' with comments=comments title='Все коментарии' %}
+        <hr>
+        {% include 'blog/templates/form_comment.html' %}
+    {% endif %}
+        </div>
+    </div>
+
+
+
+{% endblock %}

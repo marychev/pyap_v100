@@ -1,0 +1,8 @@
+.idea
+.vscode
+__pycache__
+venv/*
+theme/media/*
+theme/static/*
+*.pyc
+*.tmp

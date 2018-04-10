@@ -1,0 +1,12 @@
+{# --- FORM ADD PRODUCT IN CART --- #}
+{% if product.productitem_set.exists %}
+     <form enctype="multipart/form-data" method="post" id="addCartForm">{% csrf_token %}
+         <div class="quantity">
+             <input type="hidden" id="productId" value="{{ product.get_main_item.id }}">
+             <div class="col-md-4">{{ cart_product_form.quantity }}</div>
+         </div>
+         <button type="submit" class="jsAddToCart btn btn-primary"><i class="fa fa-shopping-cart"></i> В корзину</button>
+        <div id="ajaxError"></div>
+     </form>
+{% endif %}
+{# --- end FORM ADD PRODUCT IN CART --- #}

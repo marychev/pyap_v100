@@ -1,0 +1,15 @@
+{% load staticfiles %}
+{% load mptt_tags %}
+{% load fb_versions %}
+
+<ul id="categories-nav">
+    {% recursetree leftbar.obj_list %}
+        <li class='{% if not node.is_leaf_node %}has-sub parent{% endif %}{% if leftbar.obj.title == node.title %} active{% endif %}'>
+            <a href="{{ node.get_absolute_url }}"> {{ node.title }} </a>
+            {% if not node.is_leaf_node %}
+                <ul class="children{{ node.is_child_node }}">{{ children }}</ul>
+            {% endif %}
+        </li>
+    {% endrecursetree %}
+</ul>
+

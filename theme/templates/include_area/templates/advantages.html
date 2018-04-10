@@ -1,0 +1,35 @@
+{% load static %}
+{% load fb_versions %}
+
+
+{% comment %}
+{{ area.html_code|safe }}
+{% for area in include_areas %}
+
+{% endcomment %}
+{% if include_areas.exists %}
+    <div id="advantages">
+
+        <div class="container">
+            <div class="same-height-row">
+                {% for area in include_areas %}
+                    {% if area.code in 'advantages' %}
+                        <div class="col-sm-4">
+                            <div class="box same-height clickable">
+                                <div class="icon"><i class="fa fa-heart"></i>
+                                </div>
+                                <h3><a href="#">{{ area.title }}</a></h3>
+                                {% if area.image %}
+                                    <img class="img-thumbnail" alt="{{ area.title }}" src="{% version area.image 'medium' %}">
+                                    <hr>
+                                {% endif %}
+                                <p>{{ area.description|safe }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+{% endif %}

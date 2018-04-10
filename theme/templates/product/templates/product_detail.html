@@ -1,0 +1,227 @@
+{% extends 'main.html' %}
+{% load staticfiles %}
+{% load fb_versions %}
+
+{% block title %}{{ product.seo_title }}{% endblock %}
+{% block description %}{{ product.seo_description }}{% endblock %}
+{% block keywords %}{{ product.seo_keywords }}{% endblock %}
+
+
+{% block additional_css %}{% endblock %}
+
+
+{% block breadcrumbs %}
+    {% include 'default/breadcrumbs.html' with obj=product tree=product.catalog.first.get_family %}
+{% endblock %}
+
+{% block leftbar %}
+    {% include 'default/leftbar.html' %}
+{% endblock %}
+
+
+{% block main %}
+
+<div class="col-md-9">
+
+    <div class="row" id="productMain">
+        <div class="col-sm-6">
+            <div id="mainImage">
+                <img src="{% version product.get_main_image.image 'large' %}" alt="" class="img-responsive">
+            </div>
+            {# --- line bestseller AND new product --- #}
+            {% if product.is_new %}
+                <div class="ribbon new">
+                    <div class="theribbon">NEW</div>
+                    <div class="ribbon-background"></div>
+                </div>
+            {% endif %}
+            {% if product.is_bestseller %}
+                <div class="ribbon sale">
+                    <div class="theribbon">TOP</div>
+                    <div class="ribbon-background"></div>
+                </div>
+            {% endif %}
+            {# ----------------- #}
+        </div>
+        <div class="col-sm-6">
+            <div class="box">
+                <h1 class="text-center">{{ product.title }}</h1>
+                {% if product.articul %}<a href="{{ product.get_absolute_url }}" class='small text-muted'>{{ product.articul }}</a><br>{% endif %}
+                {% if product.description %}<p class="goToDescription"><a href="#details" class="scroll-to">{{ product.description }}</a></p>{% endif %}
+                {% if product.get_price %}{% include 'product/templates/product_price.html' with obj=product %}{% endif %}
+                {% include 'product/templates/product_items.html' with main_obj=product objects=product.productitem_set.all %}
+                <hr>
+
+                {% include 'product/templates/productl_form_add_cart.html' %}
+
+{#                    <a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add to cart</a>#}
+{#                    <a href="basket.html" class="btn btn-default"><i class="fa fa-heart"></i> Add to wishlist</a>#}
+
+
+
+            </div>
+
+            {% if product.get_images.exists %}
+                <div class="row" id="thumbs">
+                    {% for img in product.get_images %}
+                        <div class="col-xs-4">
+                            <a href="{% version img.image 'large' %}" class="thumb">
+                                <img src="{% version img.image 'medium' %}" alt="" class="img-responsive">
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+    </div>
+
+
+    <div class="box" id="details">
+        <h4>{{ product.title }}</h4>
+        {% if product.html %}
+            <div class="content">{{ product.html|safe }}</div>
+        {% endif %}
+    </div>
+
+    {% include 'product/templates/item_bestseller_product.html' with objects=product.recommend_products.all title='Похожие товары' %}
+
+</div>
+
+
+{#        {% if product.html %}#}
+{#            <div class="box">#}
+{#                <div class="content">{{ product.html|safe }}</div>#}
+{#            </div>#}
+{#        {% endif %}#}
+{##}
+{##}
+{#        {% include 'product/templates/item_bestseller_product.html' with objects=product.recommend_products.all title='Похожие товары' %}#}
+
+
+
+{##}
+{#    <div class="col-md-9" style="background-image: url("></div>#}
+{#        <div id="layout" class="wide">#}
+{#        <div id="container">#}
+{#            <div id="page-title">#}
+{#                <div class="center">#}
+{#                    <p>{{ product.title }}</p>#}
+{#                </div>#}
+{#            </div>#}
+{#            <div id="content" class="center no-sidebar">#}
+{#                <main id="main">#}
+{##}
+{#                    {% include 'catalog/templates/catalog_child_list.html' %}#}
+{##}
+{#                    <div id="product-{{ product.id }}" class="product-single-wrap post-{{ product.id }} product type-product status-publish has-post-thumbnail product_cat-pizza first instock shipping-taxable purchasable product-type-simple">#}
+{#                        <div id="product-single" class="cols-2 like-table">#}
+{#                            <div class="dervek-product-gallery dervek-product-gallery--with-images dervek-product-gallery--columns-4 images"#}
+{#                                 data-columns="4" style="opacity: 1; transition: opacity 0.25s ease-in-out;">#}
+{##}
+{#                                <figure class="dervek-product-gallery__wrapper">#}
+{#                                    <div data-thumb="{% version product.get_main_image.image 'big' %}" class="dervek-product-gallery__image">#}
+{#                                        <a href="{% version product.get_main_image.image 'max' %}">#}
+{#                                            <img width="585" height="390"#}
+{#                                                 class="attachment-shop_single size-shop_single wp-post-image"#}
+{#                                                 src="{% version product.get_main_image.image 'large' %}"#}
+{#                                                 alt="{{ product.title }}"#}
+{#                                                 title="{{ product.title }}">#}
+{#                                        </a>#}
+{#                                    </div>#}
+{#                                </figure>#}
+{#                            </div>#}
+{##}
+{#                            <div class="details">#}
+{##}
+{#                                {% comment %}#}
+{#                                <i>---------------__dev__]--------------</i>#}
+{#                                <div class="dervek-product-rating">#}
+{#                                    <div class="star-rating">#}
+{#                                        <span>Оценка <strong class="rating">5.00</strong> из 5 на основе <span class="rating">1</span> оценки клиентов</span>#}
+{#                                    </div>#}
+{#                                    <a href="http://cristiano.ukrdevs.com/shop/pizza/greek/#reviews"#}
+{#                                       class="dervek-review-link" rel="nofollow">(<span class="count">1</span> customer review)</a>#}
+{#                                </div>#}
+{#                                {% endcomment %}#}
+{##}
+{#                                <h1 class="product_title entry-title">{{ product.title }}</h1>#}
+{#                                {% if product.articul %}<p><small>{{ product.articul }}</small></p>{% endif %}#}
+{#                                <div class="product_meta">#}
+{#                                    <span class="posted_in">Категория: <a href="{% url 'catalog:catalog' product.catalog.first.slug %}">{{ product.catalog.first.title }}</a></span>#}
+{#                                </div>#}
+{#                                {% if product.get_price  %}#}
+{#                                    <p class="single-price"><span class="dervek-Price-amount amount">#}
+{#                                        <span class="__rename__ dervek-Price-currencySymbol">Р.</span>{{ product.get_price }}</span>#}
+{#                                    </p>#}
+{#                                {% endif %}#}
+{##}
+{#                                <p>{% include 'product/templates/product_price.html' with obj=product %}</p>#}
+{#                                <div class="dervek-product-details__short-description"><p>{{ product.description }}</p></div>#}
+{##}
+{#                                {% include 'product/templates/product_items.html' with main_obj=product objects=product.productitem_set.all %}#}
+{#                                <hr>#}
+{##}
+{#                                <div class="add-to-cart-wrap">#}
+{#                                    {% include 'product/templates/productl_form_add_cart.html' %}#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{##}
+{#                       {% include 'default/next_prev.html' with next_prev=next_prev %}#}
+{#                    </div>#}
+{##}
+{##}
+{#                    <div class="section-title">#}
+{#                        <p class="subtitle">***</p>#}
+{#                        <h3 class="pr-font">Все фотографии</h3>#}
+{#                    </div>#}
+{#                    {% include 'gallery/templates/gallery_photo_list.html' with objects=product.get_images %}#}
+{##}
+{##}
+{#                    {% include 'product/templates/product_detail_content.html' with obj=product %}#}
+{##}
+{#                <i>---------------CSS [!]--------------</i>#}
+{#                    <div class="both">#}
+{#                        <div class="content-section">#}
+{#                            <div id="reviews" class="dervek-Reviews">#}
+{#                                <div id="comments">#}
+{#                                    <h3 class="dervek-Reviews-title title">1 review for <span>Greek Salad</span></h3>#}
+{#                                    <ol class="commentlist">#}
+{#                                        <li class="comment even thread-even depth-1" id="li-comment-4">#}
+{#                                            <div id="comment-4" class="comment_container">#}
+{#                                                <img alt="" src="./Greek Salad – Cristiano_files/1fb2221f429981d3c12d69bb86d269a2"#}
+{#                                                     srcset="http://1.gravatar.com/avatar/1fb2221f429981d3c12d69bb86d269a2?s=120&amp;d=mm&amp;r=g 2x"#}
+{#                                                     class="avatar avatar-60 photo" height="60" width="60">#}
+{#                                                <div class="comment-text">#}
+{##}
+{#                                                    <div class="star-rating"><span style="width:100%">Rated <strong#}
+{#                                                            class="rating">5</strong> out of 5</span></div>#}
+{#                                                    <p class="meta">#}
+{#                                                        <strong class="dervek-review__author">Strange Tea</strong>#}
+{#                                                        <span class="dervek-review__dash">–</span>#}
+{#                                                        <time class="dervek-review__published-date"#}
+{#                                                              datetime="2016-08-06T17:58:38+00:00">August 6, 2016#}
+{#                                                        </time>#}
+{#                                                    </p>#}
+{#                                                    <div class="description"><p>Love it!))</p>#}
+{#                                                    </div>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                        </li><!-- #comment-## -->#}
+{#                                    </ol>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{##}
+{##}
+{#                </main>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+
+
+{% endblock %}
+
+{% block additional_js %}{% endblock %}

@@ -1,0 +1,1 @@
+[{"model": "users.userprofile", "pk": 1, "fields": {"user": 1, "avatar": "demo/photo_2017-10-25_21-36-05.jpg", "patronymic": "Sergeevich", "birthday": "1986-10-08", "phone": "+79203697923", "address": null, "about": "", "id_signed_news": true}}]

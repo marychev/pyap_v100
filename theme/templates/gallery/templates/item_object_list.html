@@ -1,0 +1,19 @@
+{% load static %}
+{% load fb_versions %}
+
+
+<div class="post-116 page type-page status-publish hentry">
+    <div id="gallery-1" class="gallery galleryid-116 gallery-columns-3 gallery-size-thumbnail">
+        {% with object_list=objects %}
+            {% for obj in object_list %}
+                <figure class="gallery-item">
+                    <div class="gallery-icon landscape">
+                        <a href="{% version obj.image 'max' %}">
+                            <img width="370" height="247" src="{% version obj.image 'medium' %}" class="attachment-thumbnail size-thumbnail" title="{{ obj.title }}" alt="{{ obj.title }}">
+                        </a>
+                    </div>
+                </figure>
+            {% endfor %}
+        {% endwith %}
+    </div>
+</div>

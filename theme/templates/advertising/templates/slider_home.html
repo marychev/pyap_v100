@@ -1,0 +1,30 @@
+{# Slider #}
+{% load static %}
+{% load fb_versions %}
+
+
+{% if slider_home %}
+<div class="container">
+    <div class="col-md-12">
+        <div id="main-slider">
+            {% with slider=slider_home  %}
+                {% for sh in slider %}
+                <div class="item">
+                    <img src="{% version sh.image 'max' %}" alt="{{ sh.title }}" title="{{ sh.title }}" class="img-responsive">
+                    <div class="info">
+                        <h3 class='title'>
+                            {% if sh.url %}
+                                <a target="_blank" href="{{ sh.url }}">{{ sh.title }}</a>
+                            {% else %}
+                                <a>{{ sh.title }}</a>
+                            {% endif %}
+                        </h3>
+                        {% if sh.get_description %}<p>{{ sh.get_description }}</p>{% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            {% endwith %}
+        </div>
+    </div>
+</div>
+{% endif %}

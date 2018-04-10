@@ -1,0 +1,81 @@
+{% extends 'main.html' %}
+{% load staticfiles %}
+{#{% load thumbnail %}#}
+
+{% block title %}Заказ № {{ pk }}{% endblock %}
+{% block description %}Заказ № {{ pk }}{% endblock %}
+{% block keywords %}Заказ № {{ pk }}{% endblock %}
+
+{% block additional_css %}{% endblock %}
+
+{% block header %}
+    {% include 'default/header.html' %}
+{% endblock %}
+
+{% block leftbar %}
+    <div id="layout" class="wide">
+        <div id="container">
+            <div id="content" class="center">
+                <div class='dervek-my-account'>
+                    {% include 'users/templates/left_panel.html' %}
+{% endblock %}
+
+{% block main %}
+                    <div class="dervek-MyAccount-content">
+                        <div class="section-title">
+                            <p class="subtitle">{{ order.created }}</p>
+                            <h3 class="pr-font">Заказ № {{ pk }}</h3>
+                        </div>
+
+                        <table>
+                                <thead><tr>
+                                    <th>#</th>
+                                    <th class='col-md-2'>Товар</th>
+                                    <th>Кол-во</th>
+                                    <th class='col-md-2'>Цена</th>
+                                    <th class='col-md-2'>Сумма</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                {% for orderitem in order.orderitem_set.all %}
+                                    {% with pi=orderitem.product_item %}
+                                        <tr class="spaceUnder">
+                                            <td>{{ forloop.counter }}</td>
+                                            <td>
+                                                {% include 'cart/templates/image_product_item.html' %}
+                                            </td>
+                                            <td>{{ orderitem.quantity }} шт.</td>
+                                            <td data-label="Цена"><i class="fa fa-rub" aria-hidden="true"></i>
+                                                {% if pi.price_discount > 0 %}{{ pi.price_discount|floatformat:'2' }}{% else %}{{ pi.price|floatformat:'2' }}{% endif %}
+                                            </td>
+                                            <td><i class="fa fa-rub" aria-hidden="true"></i>
+                                                <span>{{ orderitem.get_cost|floatformat:'2' }}</span
+                                            </td>
+                                        </tr>
+                                    {% endwith %}
+                                {% endfor %}
+                                <tr class="all-price">
+                                    <td colspan="5" class="title">Общая стоимость</td>
+                                    <td class="price"><i class="fa fa-rub" aria-hidden="true"></i>
+                                        <span class='jsTotalCartPrice'>{{ order.total_cost|floatformat:'2' }}</span>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table><br>
+                        {% if order.ttn %}
+                            <p><span class='text-muted'>Товарно-транспортная накладная:</span> {{ order.ttn }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block additional_js %}{% endblock %}
+
+
+
+

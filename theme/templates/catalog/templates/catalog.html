@@ -1,0 +1,43 @@
+{% extends 'main.html' %}
+{% load staticfiles %}
+{% load mptt_tags %}
+{% load fb_versions %}
+
+{% block title %}{{ object.seo_title }}{% endblock %}
+{% block description %}{{ object.seo_description }}{% endblock %}
+{% block keywords %}{{ object.seo_keywords }}{% endblock %}
+
+{% block additional_css %}{% endblock %}
+
+{% block breadcrumbs %}
+    {% include 'default/breadcrumbs.html' with tree=object.get_ancestors obj=object %}
+{% endblock %}
+
+{% block leftbar %}
+    {% include 'default/leftbar.html' %}
+{% endblock %}
+
+{% block main %}
+
+    <div class="col-md-9" {% if object.get_main_image %}style="background-image: url({% version object.get_main_image.image 'max' %}); background-size: cover;"{% endif %}>
+
+        <div class="box">
+            <h1>{{ object.title }}</h1>
+            {% if object.description %}<p>{{ object.description }}</p>{% endif %}
+        </div>
+
+{#        {% include 'catalog/templates/catalog_child_list.html' %}#}
+
+        {% include 'catalog/templates/catalog_sort_row.html' %}
+
+        {% include 'catalog/templates/catalog_product_list.html' %}
+
+        {% if object.html %}
+            <div class="box">
+                <div class="content">{{ object.html|safe }}</div>
+            </div>
+        {% endif %}
+    </div>
+
+
+{% endblock %}

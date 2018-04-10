@@ -1,0 +1,64 @@
+{% load static %}
+{#{% load thumbnail %}#}
+{% load fb_versions %}
+
+{% with products_list=products %}
+    {% for product in products_list %}
+        <div class="{% if css_class %}{{ css_class }}{% else %}col-md-4{% endif %} col-sm-6">
+            <div class="stock-item">
+                <div class="stock-item-wrap">
+                    {% if product.image %}
+                        <a href="{{ product.get_absolute_url }}">
+                            {# --- line bestseller AND new product --- #}
+                            {% if product.is_new %}
+                                <div class="icon-stock"><img src="{% static 'product/img/new.png' %}" alt="icon"></div>
+                            {% endif %}
+                            {% if product.is_bestseller %}
+                                <div class="icon-stock" {% if product.is_new %}style="top: 25px" {% endif %}>
+                                    <img src="{% static 'product/img/top.png' %}" alt="icon">
+                                </div>
+                            {% endif %}
+                            {# ----------------- #}
+{#                            {% thumbnail product.image '600x400' crop="center" as im %}#}
+                                <img src="{% version product.image 'medium' %}" title="{{ product.seo_title }}" alt="{{ product.title }}" data-toggle="tooltip" data-placement="top">
+{#                            {% endthumbnail %}#}
+                        </a>
+                    {% else %}
+                        <a class='no_img_catalog' href="{{ product.get_absolute_url }}" title="{{ product.seo_title }}" data-toggle="tooltip" data-placement="top">
+                            <img src="{% static 'img/no-image.jpg' %}">
+                        </a>
+                    {% endif %}
+                </div>
+                <div class="stock-item-bottom">
+                    <div class="bottom-head">
+                        <div class="name">
+                            <span class="title">{{ product.title|truncatechars:75 }}</span>
+                        </div>
+
+                        <div class="price">
+                            {% if product.get_price_discount > 0 %}
+                                <small class="old-price">{{ product.get_price|floatformat:'2' }} <i class="fa fa-rub" aria-hidden="true"></i></small>
+                                <span class="now-price">{{ product.get_price_discount|floatformat:'2' }} <i class="fa fa-rub" aria-hidden="true"></i></span>
+                            {% else %}
+                                <span class="now-price">{{ product.get_price|floatformat:'2' }} <i class="fa fa-rub" aria-hidden="true"></i></span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="bottom-actions">
+                        <a href="{{ product.get_absolute_url }}">
+                            <span class="button-item"><i class="fa fa-eye" aria-hidden="true"></i></span>
+                        </a>
+                        <a class="center-button" href="">
+                            <span class="button-item"><i class="fa fa-tags" aria-hidden="true"></i></span>
+                        </a>
+                        {% if product.get_price %}
+                            <a class='jsAddToCart' data-product-id="{{ product.get_main_item.id }}" data-is-catalog="true">
+                                <span class="button-item"><i class="fa fa-cart-plus" aria-hidden="true"></i></span>
+                            </a><div id="ajaxError"></div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endwith %}

@@ -1,0 +1,37 @@
+{% if comments %}
+    <section id="testimonials-slider" class="no-bg">
+        <div class="center">
+            <div class="section-title">
+                <p class="subtitle">Что говорят наши клиенты</p>
+                <h3 class="pr-font">{{ title }}</h3>
+            </div>
+
+            <div class="swiper-container swiper-container-horizontal">
+                <div class="swiper-wrapper" style="transform: translate3d(-1170px, 0px, 0px); transition-duration: 0ms;">
+                    {% for comment in comments %}
+                        <div class="swiper-slide {% if forloop.first in 'True' %}swiper-slide-active{% endif %}">
+                            <div class="center">
+                                <div class="content">
+                                    <i class="fa fa-quote-left" aria-hidden="true"></i>
+                                    <blockquote><p>{{ comment.text|truncatewords:80}}</p></blockquote>
+                                    <h5>{{ comment.username }}</h5>
+                                    <small>
+                                        <time itemprop="dateCreated" datetime="{{ comment.created|date:'Y-m-d H:i:s' }}">{{ comment.created|date:'d/m/Y' }}</time>
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    {% empty %}
+                        <p>Коментариев нет...</p>
+                    {% endfor %}
+                </div>
+                <div class="nav">
+                    <span class="prev fa fa-caret-left"></span>
+                    <span class="next fa fa-caret-right"></span>
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+{% endif %}

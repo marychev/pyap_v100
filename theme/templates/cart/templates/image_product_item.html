@@ -1,0 +1,11 @@
+{% load fb_versions %}
+
+<a href="{{ pi.get_absolute_url }}">
+    {% if pi.product.image %}
+        <img src="{% version pi.product.image 'thumbnail' %}" alt="{{ pi.name }}">
+    {% else %}
+        <img src="{% version pi.product.productimage_set.first.image 'thumbnail' %}" alt="{{ pi.name }}">
+    {% endif %}
+    <span>{{ pi.name }}</span>
+    {% if pi.articul %}<small class='text-muted'>{{ pi.articul }}</small>{% endif %}
+</a>

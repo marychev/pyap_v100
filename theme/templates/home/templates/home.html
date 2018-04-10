@@ -1,0 +1,38 @@
+{% extends 'main.html' %}
+{% load staticfiles %}
+{% load fb_versions %}
+
+{% block title %}{{ home.seo_title }}{% endblock %}
+{% block description %}{{ home.seo_description }}{% endblock %}
+{% block keywords %}{{ home.seo_keywords }}{% endblock %}
+
+{% block additional_css %}{% endblock %}
+
+
+{% block main %}
+
+    {% include 'advertising/templates/slider_home.html' %}
+
+    {% load get_include_area %}
+    {% get_include_area request code='advantages' %}
+
+    {% include 'home/templates/content.html' %}
+
+    {% include 'product/templates/item_bestseller_product.html' with objects=new_products title='НОВИНКИ' %}
+
+    {% include 'product/templates/item_bestseller_product.html' with objects=bestseller_products title='ХИТ ПРОДАЖ' %}
+
+    {% if setting_template.phone %}
+        <section class="text-center row" style="background-image:url({% version home.get_main_image.image 'max' %});">
+            <h2>Звоните: <a href="tel:{{ setting_template.phone }}">{{ setting_template.phone }}</a></h2>
+        </section>
+    {% endif %}
+
+    {% if home.blog %}
+        {% include 'blog/templates/blog_post_list.html' with obj=home.blog %}
+    {% endif %}
+
+
+{% endblock %}
+
+{% block additional_js %}{% endblock %}

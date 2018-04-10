@@ -1,0 +1,17 @@
+{% with objs=objects %}
+{% for obj in objs %}
+    {% if obj.get_price %}
+        <p>
+        {% if obj.get_price or obj.get_price_discount > 0 %}
+            <input type="radio" name="product_item" id="product_item_{{ obj.id }}" value="{{ obj.id }}"
+            {% if main_obj.get_main_item.id == obj.id %}checked{% endif %}>
+            <label for="product_item_{{ obj.id }}">{{ obj.name }}</label>
+        {% endif %}
+            {% if obj.articul %}<small>Артикул:</small> {{ obj.articul }}{% endif %}
+            {% include 'product/templates/product_item_price.html' %}
+            {% if obj.quantity %}<small>Кол-во:</small> {{ obj.quantity }} шт.
+            {% endif %}
+        </p>
+    {% endif %}
+{% endfor %}
+{% endwith %}

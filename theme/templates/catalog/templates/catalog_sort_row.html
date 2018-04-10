@@ -1,0 +1,30 @@
+<div class="box info-bar">
+    <div class="row">
+        <div class="col-sm-12 col-md-2 products-showing">
+            <strong>{% if 'per_page' in request.GET %}{{ request.GET.per_page }}{% else %}12{% endif %}</strong> / <strong>{{ objects|length }}</strong>
+        </div>
+
+        <div class="col-sm-12 col-md-10  products-number-sort">
+            <div class="row">
+                <form class="form-inline">
+                    <div class="col-md-6 col-sm-6">
+                        <div class="products-number">
+                            <strong>На странице:</strong>
+                            <a href="?per_page=12" class="btn btn-default btn-sm {% if request.GET.per_page in '12' %}btn-primary{% endif %}">12</a>
+                            <a href="?per_page=18" class="btn btn-default btn-sm {% if request.GET.per_page in '18' %}btn-primary{% endif %}">18</a>
+                            <a href="?per_page=24" class="btn btn-default btn-sm {% if request.GET.per_page in '24' %}btn-primary{% endif %}">24</a>
+                            <a href="?per_page=96" class="btn btn-default btn-sm {% if request.GET.per_page in '96' %}btn-primary{% endif %}">96</a>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="products-sort-by">
+                            <strong>Сортировка:</strong>
+                            <a {% if request.GET.price %} class="text-info"{% endif %} href="?price=-price">Цене</a> |
+                            <a {% if request.GET.is_new %} class="active"{% endif %}><a href="?is_new=-is_new">Новинки</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

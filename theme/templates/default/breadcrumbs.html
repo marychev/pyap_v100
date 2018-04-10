@@ -1,0 +1,32 @@
+{# BREADCRUMB #}
+<div class="col-md-12">
+<ul class="breadcrumb">
+    <li><a href="/">Главная</a></li>
+    {# --- явно передаем список``breadcrumbs``--- #}
+    {% if breadcrumbs %}
+        {% with breads=breadcrumbs %}
+            {% for bread in breads %}
+            <li>
+                <a href="{{ bread.url }}">{{ bread.title }}</a>
+            </li>
+            {% endfor %}
+        {% endwith %}
+    {% else %}
+        {# --- точная передача параметров список``tree`` и ``obj``--- #}
+        {% with tree_list=tree %}
+            {% if tree_list %}
+                {% for parent in tree_list %}
+                    <li><a href="{{ parent.get_absolute_url }}">{{ parent.title }}</a></li>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    {% endif %}
+
+    <li class='active'>
+        <a class='text-muted' href="{{ obj.get_absolute_url }}">{{ obj.title }}</a>
+    </li>
+
+</ul>
+</div>
+
+{# endBREADCRUMB #}

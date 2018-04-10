@@ -1,0 +1,8 @@
+{# PRODUCT_LIST#}
+{% if objects %}
+    {% include 'gallery/templates/item_object_list.html' %}
+    {% include 'default/pagination.html' %}
+{% else %}
+    <p>:( В этой категории пусто.</p>
+{% endif %}
+{# endPRODUCT_LIST#}

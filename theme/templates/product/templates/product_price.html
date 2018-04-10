@@ -1,0 +1,9 @@
+<p class='price'>
+    {% if obj.get_price_discount > 0 %}
+        <span>{{ obj.get_price_discount|floatformat:'2' }} р.</span>
+        <del>{{ obj.get_price|floatformat:'2' }} р.</del>
+    {% elif obj.get_price > 0  %}
+        <span>{{ obj.get_price|floatformat:'2' }} р.</span>
+    {% endif %}
+</p>
+

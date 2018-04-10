@@ -1,0 +1,54 @@
+{% extends 'main.html' %}
+
+{% block title %}Регистрация{% endblock %}
+{% block description %}Регистрация{% endblock %}
+{% block keywords %}Регистрация{% endblock %}
+
+{% block additional_css %}{% endblock %}
+
+{% block main %}
+<div class="col-md-6">
+    <div class="box">
+        <h1>Регистрация</h1><hr>
+        {{ form.errors }}
+        <form method="post" action="{% url 'users:register' %}">{% csrf_token %}
+            <p>
+                <label for="id_username">Email:</label>
+                <input class='form-control' type="email" name="username" placeholder=":Email" required id="id_username" maxlength="150"><br>
+                <small class="text-muted ">Обязательное поле. Не более 150 символов. Только буквы, цифры и символы @/./+/-/_.</small>
+            </p>
+            <p>
+                <label for="id_password1">Пароль:</label>
+                <input class='form-control' type="password" name="password1" required="" id="id_password1"></p>
+            <ul class="small text-muted">
+                <li>Ваш пароль не должен совпадать с вашим именем или другой персональной информацией или быть слишком похожим на неё.</li>
+                <li>Ваш пароль должен содержать как минимум 8 символов.</li>
+                <li>Ваш пароль не может быть одним из широко распространённых паролей.</li>
+                <li>Ваш пароль не может состоять только из цифр.</li>
+            </ul>
+            <p>
+                <label for="id_password2">Подтверждение пароля:</label>
+                <input class='form-control' type="password" name="password2" required="" id="id_password2"><br>
+                <small class="text-muted">Для подтверждения введите, пожалуйста, пароль ещё раз.</small>
+            </p>
+
+{#                 {% comment %}#}
+{#                 [--- DO NOT DELETE---]#}
+{#                 <div class="form-group">#}
+{#                    <label for="id_phone">Телефон <span class="star">*</span></label>#}
+{#                    <input type="text" name="phone" id="id_phone" class='jsPhoneInput' required>#}
+{#                </div>#}
+{#                {% endcomment %}#}
+
+            <p>
+                <button type="submit" class="btn btn-primary"><i class="fa fa-user-md"></i> Создать аккаунт</button>
+                <input type="hidden" name="next" value="{% url 'home:home' %}">
+            </p>
+            <a href="{% url 'users:login' %}">Уже есть акаунт. Войти.</a>
+         </form>
+    </div>
+</div>
+
+
+{% endblock %}
+{% block additional_js %}{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'main.html' %}
+{% load staticfiles %}
+{% load mptt_tags %}
+{% load fb_versions %}
+{% load mptt_tags %}
+{% load rupluralize %}
+{% load markdown_deux_tags %}
+
+{% block title %}{{ object.seo_title }}{% endblock %}
+{% block description %}{{ object.seo_description }}{% endblock %}
+{% block keywords %}{{ object.seo_keywords }}{% endblock %}
+
+
+
+{% block breadcrumbs %}
+    {% include 'default/breadcrumbs.html' with tree=leftbar.obj.get_ancestors obj=object %}
+{% endblock %}
+
+{% block leftbar %}
+    {% include 'default/leftbar.html' with leftbar=leftbar %}
+{% endblock %}
+
+
+{% block main %}
+
+
+    <div class="col-md-9">
+        <div class="box"><h1>{{ object.title }}</h1></div>
+
+        {% for img in object.get_images %}
+             <img src="{% version img.image 'max' %}" alt="{{ img.title }}" title="{{ img.image_title }}" class="img-responsive">
+         {% endfor %}
+        {% if objects %}
+            <h5 class="pr-font">ВСЕ СТАТЬИ:</h5>{% include 'default/pagination.html' %}
+        {% else %}
+            <p><i>: (</i> Записи еще не опубликованны...</p>
+        {% endif %}
+{#        {% include 'catalog/templates/catalog_child_list.html' %}#}
+        {% include 'blog/templates/blog_post_list.html' with obj=object %}
+
+        {% if object.html %}
+            <div class="box">
+                <div class="content">{{ object.html|safe }}</div>
+            </div>
+        {% endif %}
+        {% include 'catalog/templates/catalog_child_list.html' %}
+    </div>
+
+
+{% endblock %}

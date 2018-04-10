@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+{% load mptt_tags %}
+{% load fb_versions %}
+
+
+{% block content %}
+    {% block header %}{% include 'default/header.html' %}{% endblock %}
+    <div id="content">
+        <div class="container">{% block breadcrumbs %}{% endblock %}</div>
+        <div class="container">
+            {% block main %}{% endblock %}
+            {% block leftbar %}{% endblock %}
+        </div>
+    </div>
+    {% block footer %}{% include 'default/footer.html' %}{% endblock %}
+
+{% endblock %}
+
+

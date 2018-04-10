@@ -1,0 +1,16 @@
+<hr>
+{% if 'post' in type %}
+    {% if next_prev.next %}
+        <a href="{{ next_prev.next.get_absolute_url }}">{{ next_prev.next.title|truncatechars:30 }} -></a>
+    {% endif %}
+    {% if next_prev.prev %}
+        <a href="{{ next_prev.prev.get_absolute_url }}"><- {{ next_prev.prev.title|truncatechars:30 }}</a>
+    {% endif %}
+{% else %}
+    {% if next_prev.next %}
+         <a href="{{ next_prev.next.get_absolute_url }}">{{ next_prev.next.title|truncatechars:30 }} -></a>
+    {% endif %}
+    {% if next_prev.prev %}
+        <a href="{{ next_prev.prev.get_absolute_url }}"><- {{ next_prev.prev.title|truncatechars:30 }}</a>
+    {% endif %}
+{% endif %}

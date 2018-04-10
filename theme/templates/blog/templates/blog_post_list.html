@@ -1,0 +1,29 @@
+{% load fb_versions %}
+
+<div class="box text-center" data-animate="fadeInUp">
+    <h3 class="text-uppercase"><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a></h3>
+    {% if obj.description %}<p class="lead">{{ obj.description }}</p>{% endif %}
+</div>
+
+<div class="row">
+    <div class="col-md-12" data-animate="fadeInUp">
+        <div id="blog-homepage" class="row">
+            {% for post in obj.post_set.all %}
+                <div class="col-sm-6">
+                    <div class="post">
+                        <div>
+                            <h4><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h4>
+                            {% if post.get_main_image.image %}
+                                <img class="img-rounded col-md-4" src="{% version post.get_main_image.image 'small' %}" alt="">
+                            {% endif %}
+                            <p class='info'>{{ post.description }}</p>
+                            <a class="btn-color" href="{{ post.get_absolute_url }}">Подробнее</a>
+                            <p><time class="small text-muted" datetime="{{ post.created }}">{{ post.created }}</time></p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <!-- /#blog-homepage -->
+    </div>
+</div>

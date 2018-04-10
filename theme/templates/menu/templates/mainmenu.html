@@ -1,0 +1,89 @@
+{% load static %}
+{% load mptt_tags %}
+{% load url_handler %}
+{% load fb_versions %}
+
+
+<div class="navbar navbar-default yamm" role="navigation" id="navbar">
+    <div class="container">
+        <div class="navbar-header">
+            {# -- logo -- #}
+            <a href="/"  class="navbar-brand home" data-animate-hover="bounce">
+                {% if setting_template.logo %}
+                    <img class="hidden-xs" src="{% version setting_template.logo 'small' %}" alt="{{ setting_template.site.name }}" title="{{ setting_template.title }}">
+                    <img src="{% static 'img/logo-small.png' %}" alt="{{ setting_template.site.name }}" class="visible-xs">
+                    <span class="sr-only">{{ setting_template.site.name }}</span>
+                {% else %}
+                    <h2 class="title">{{ setting_template.site.name }}</h2>
+                    <small>{{ setting_template.title }}</small>
+                {% endif %}
+            </a>
+
+            {# -- cart -- #}
+            <div class="navbar-buttons">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation">
+                    <span class="sr-only">Toggle navigation</span>
+                    <i class="fa fa-align-justify"></i>
+                </button>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#search">
+                    <span class="sr-only">Toggle search</span>
+                    <i class="fa fa-search"></i>
+                </button>
+                <a class="btn btn-default navbar-toggle" href="basket.html">
+                    <i class="fa fa-shopping-cart"></i>  <span class="hidden-xs">3 items in cart</span>
+                </a>
+
+            </div>
+
+        </div>
+        <!--/.navbar-header -->
+
+        <div class="navbar-collapse collapse" id="navigation">
+            <ul id="menu-navigation" class="primary-menu">
+                {% recursetree mainmenu %}
+                    <li id="menu-item-{{ node.id }}"
+                        class='menu-item menu-item-type-post_type menu-item-object-page menu-item-{{ node.id }}
+                            {% if current_url == node.get_url and current_url != '/' %} active{% endif %}
+                            {% if not node.is_leaf_node %}menu-item-has-children{% endif %}'>
+                        <a href="{% if node %}{{ node|url_handler:'mainmenu' }}{% else %}/{% endif %}">{{ node.name }}</a>
+                        {% if not node.is_leaf_node %}
+                            <ul class="children sub-menu">{{ children }}</ul>
+                        {% endif %}
+                    </li>
+                {% endrecursetree %}
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+
+        <div class="navbar-buttons">
+
+            <div class="navbar-collapse collapse right" id="basket-overview">
+                {% with total_qty=cart|length %}
+                    {% if total_qty %}
+                    <a href="{% url "cart:cart-detail" %}" class="btn btn-primary navbar-btn">
+                        <i class="fa fa-shopping-cart"></i><small class="hidden-sm">
+                        <span class="count jsTotalCartQty">{{ total_qty }}</span>шт/</small><small class='XXXCARTtotalprice'>{{ cart.get_total_price|floatformat:'2' }}</small>
+                    </a>
+                    {% endif %}
+                {% endwith %}
+            </div>
+            <!--/.nav-collapse -->
+
+            <div class="navbar-collapse collapse right" id="search-not-mobile">
+                <button type="button" class="btn navbar-btn btn-primary" data-toggle="collapse" data-target="#search">
+                    <span class="sr-only">Toggle search</span>
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
+
+        </div>
+
+        {% include 'search/search_form.html' %}
+        <!--/.nav-collapse -->
+
+    </div>
+    <!-- /.container -->
+</div>
+<!-- /#navbar -->
+
+

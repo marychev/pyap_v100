@@ -1,0 +1,66 @@
+{% extends 'main.html' %}
+{% load staticfiles %}
+
+{% block title %}Мои заказы{% endblock %}
+{% block description %}Мои заказы{% endblock %}
+{% block keywords %}Мои заказы{% endblock %}
+
+{% block additional_css %}{% endblock %}
+
+
+{% block header %}
+    {% include 'default/header.html' %}
+   {% endblock %}
+
+{% block leftbar %}
+    <div id="layout" class="wide">
+        <div id="container">
+            <div id="content" class="center">
+                <div class='dervek-my-account'>
+                    {% include 'users/templates/left_panel.html' %}
+{% endblock %}
+
+{% block main %}
+                    <div class="dervek-MyAccount-content">
+                        <div class="section-title">
+                            <p class="subtitle">***</p>
+                            <h3 class="pr-font">Мои заказы</h3>
+                        </div>
+
+                        <table class="dervek-orders-table dervek-MyAccount-orders shop_table shop_table_responsive my_account_orders account-orders-table">
+                            <thead><tr>
+                                <th>№</th>
+                                <th>Дата</th>
+                                <th>Статус</th>
+                                <th>Сумма</th>
+                                <th>Подробнее</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% with order_list=orders %}
+                            {% for order in order_list %}
+                                <tr class="spaceUnder">
+                                    <td>{{ order.pk }}</td>
+                                    <td>{{ order.created }}</td>
+                                    <td>{% if order.is_paid %}Оплачен{% else %}Не оплачен{% endif %}</td>
+                                    <td>{{ order.total_cost }}<i class="fa fa-rub" aria-hidden="true"></i></td>
+                                    <td><a href="{% url 'users:order_detail' order.pk %}">Подробнее</a></td>
+                                </tr>
+                            {% empty %}
+                                <p class="">Заказов пока не было :(</p>
+                            {% endfor %}
+                            {% endwith %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block additional_js %}{% endblock %}
+
+
+
+

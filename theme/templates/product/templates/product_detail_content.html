@@ -1,0 +1,57 @@
+{# Nav tabs #}
+
+<div>
+
+    {% comment %}
+    ----------------------
+    <ul class="nav nav-tabs">
+        <li class="active">
+            <a href="#html" data-toggle="tab">ОПИСАНИЕ</a>
+        </li>
+        <li>
+            <a href="#comment" data-toggle="tab">ОТЗЫВЫ</a>
+        </li>
+    </ul>
+    ----------------------
+    {% endcomment %}
+
+    <div class="tab-content">
+
+        <div class="tab-pane fade in active" id="html">
+            {% if obj.html %}<div class='container html'>{{ obj.html|safe }}</div>{% endif %}
+        </div>
+
+        <div class="tab-pane fade" id="comment">
+            <div class="product-comments">
+
+                {% include 'default/comment_list.html' with comments=review_products title='Отзывы покупателей' %}
+
+                <div class="section-title">
+                    <p class="subtitle">***</p>
+                    <h4>Оставтье свой комментарий</h4>
+                </div>
+                <form method="post" action="{% url 'product:product_comment' product_id=product.id %}">{% csrf_token %}
+                    <div id="form-messages" class="submit-form-message">{{ comment_form.errors }}</div>
+                    <div class="form-item">{{ comment_form }}</div>
+                    <input type="submit" class="btn-form" value="Оставить коментарий">
+                </form>
+                <br><br><br>
+{#                <form class="row" action="" method="post">{% csrf_token %}#}
+{#                    <p class="comment-form-author">#}
+{#                        <input type="hidden" name="product" id="id_product" value="{{ product.id }}">#}
+{#                        <input name="username" class="form-control" placeholder=":Имя" id="id_username" required value="{% if request.user.is_authenticated %}{{ request.user.userprofile.get_short_name }}{% else %}:аноним{% endif %}">#}
+{#                    </p>#}
+{#                    <p class="comment-form-author">#}
+{#                        <input type="email" name="email" class="form-control" placeholder=":Email" id="id_email" {% if request.user.is_authenticated %}value="{{ request.user.email }}" {% endif %}>#}
+{#                    </p>#}
+{#                    <p class="comment-form-author">#}
+{#                        <textarea name="text" required rows="3" placeholder=":Сообщение" class="form-control" cols="40" id="id_text"></textarea>#}
+{#                        <input type="submit" class="button max" value="Оставить отзыв">#}
+{#                    </p>#}
+{#                </form>#}
+            </div>
+
+        </div>
+    </div>
+</div>
+{# end Nav tabs #}

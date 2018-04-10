@@ -1,0 +1,43 @@
+{# PAGINATION #}
+{% if objects.has_other_pages %}
+    <ul class="pagination">
+        {% if objects.has_previous %}
+            <li>
+                {% if q %}
+                    <a href="?q={{ q }}&page={{ objects.previous_page_number }}">«</a>
+                {% else %}
+                    <a href="?page={{ objects.previous_page_number }}">«</a>
+                {% endif %}
+            </li>
+        {% else %}
+           <li><a href="#">«</a></li>
+        {% endif %}
+
+        {% for i in objects.paginator.page_range %}
+            {% if objects.number == i %}
+                <li class="active"><span aria-current="page">{{ i }}</span></li>
+            {% else %}
+                <li>
+                    {% if q %}
+                        <a href="?q={{ q }}&page={{ i }}">{{ i }}</a>
+                    {% else %}
+                        <a href="?page={{ i }}">{{ i }}</a>
+                    {% endif %}
+                </li>
+            {% endif %}
+        {% endfor %}
+
+        {% if objects.has_next %}
+            <li>
+                {% if q %}
+                    <a href="?q={{ q }}&page={{ objects.next_page_number }}">»</a>
+                {% else %}
+                    <a href="?page={{ objects.next_page_number }}">»</a>
+                {% endif %}
+            </li>
+        {% else %}
+            <li><a href="#">»</a></li>
+        {% endif %}
+    </ul>
+{% endif %}
+{# endPAGINATION #}

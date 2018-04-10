@@ -1,0 +1,51 @@
+{% extends 'main.html' %}
+{% load staticfiles %}
+{% load thumbnail %}
+
+{% load markdown_deux_tags %}
+
+{% block content %}
+
+	<article itemscope itemtype="http://schema.org/Article">
+		<header itemprop="name">
+			<a href="{{ post.get_absolute_url }}">
+				<h1>{{ post.page.title }}</h1>
+			</a>
+		</header>
+		
+		<p class="publish-data">
+			Posted on 
+			<time itemprop="datePublished" datetime="{{ post.created|date:'Y-m-d H:i:s' }}">
+				{{ post.created }}
+			</time>
+			by 
+			<span itemprop="author">{{ post.posted_by }}</span> - 
+			<a itemprop="discussionUrl" href="{{ post.get_absolute_url }}#comments">
+				<span itemprop="comment">
+					{{ post.comment_count }} comment{{ post.comment_count|pluralize }}
+				</span>
+			</a>
+		</p>
+
+		<span itemprop="articleBody">{{ post.comment|markdown }}</span>
+
+		<footer>
+			<span class="hidden" itemprop="wordCount">{{ post.comment|wordcount }}</span>
+		</footer>
+		<hr />
+	</article>
+
+
+<a name="comments"><h2>Comment</h2></a>
+{% if post.allow_comments %}
+	{% include 'blog/includes/post_form.html' %}
+	<hr />
+	<h2>Comments</h2>
+
+	{% include page_template %}
+
+{% else %}
+	<p>Comments are disabled for this post.</p>
+{% endif %}
+
+{% endblock %}

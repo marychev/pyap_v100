@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Заказ № {{ order.id }} от {{ order.created }} | PYAP</title>
+</head>
+<body>
+<style>
+    .center {text-align: center;}
+    body{color: #333;}
+    table {border:1px solid #000; border-collapse:collapse; font-family:arial,sans-serif; font-size:80%; width: 100%;}
+    td,th{ border:1px solid #000; border-collapse:collapse; padding:5px;}
+</style>
+
+<p class="center"><strong>Заказ № {{ order.id }} от {{ order.created }}</strong></p>
+<p><b>ГРУЗОПОЛУЧАТЕЛЬ</b></p>
+<p><b>ФИО:</b> {{ order.get_user_full_name }}</p>
+
+{#<p><strong>Паспорт:</strong>#}
+{#    серия {{ order.owner.delivery_passport_seria }},#}
+{#    номер {{ order.owner.delivery_passport_nomer }},#}
+{#    выдан {{ order.owner.delivery_passport_vidan }},#}
+{#    когда выдан {{ order.owner.delivery_passport_kogda_vidan }}#}
+{#</p>#}
+<p><strong>Адрес доставки:</strong>{% if order.postal_code %}{{ order.postal_code }}{% endif %} {{ order.address }}</p>
+<p>
+    <b>Комментарий к заказу:</b> {{ order.comment }}
+</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>№</th>
+            <th>Товар</th>
+            <th>Артикул</th>
+            <th>Цена</th>
+            <th>Кол-во</th>
+            <th>Сумма</th>
+            <th>Для заметок</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in order.orderitem_set.all %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ item.product_item.product.title }} /
+                    {{ item.product_item.name }} /
+                    {{ item.product_item.product.articul }}</td>
+                <td>{{ item.product_item.articul }}</td>
+                <td>{{ item.price|floatformat:2 }} руб.</td>
+                <td>{{ item.quantity }} шт.</td>
+                <td>{{ item.get_cost|floatformat:2 }} руб.</td>
+                <td></td>
+            </tr>
+        {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr>
+            <th style="text-align:right;" colspan="4">ИТОГО</th>
+            <td><strong>{{ order.get_total_qty }} шт.</strong></td>
+            <td><strong>{{ order.total_cost }} руб.</strong></td>
+        </tr>
+    </tfoot>
+</table>
+
+<script>
+    window.print();
+</script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+{% extends 'main.html' %}
+{% load staticfiles %}
+
+{% block title %}Настройки аккаунта{% endblock %}
+{% block description %}Настройки аккаунта{% endblock %}
+{% block keywords %}Настройки аккаунта{% endblock %}
+
+{% block additional_css %}{% endblock %}
+
+{% block header %}
+    {% include 'default/header.html' %}
+{% endblock %}
+
+{% block leftbar %}
+    <div id="layout" class="wide">
+        <div id="container">
+            <div id="content" class="center">
+
+                <div class='dervek-my-account'>
+                    {% include 'users/templates/left_panel.html' %}
+{% endblock %}
+
+
+{% block main %}
+                    <div class='dervek-MyAccount-content'>
+                        <div class="section-title">
+                            <p class="subtitle">***</p>
+                            <h3 class="pr-font">Настройки аккаунта</h3>
+                        </div>
+                        {{ form.errors }}
+                        <form method="post">{% csrf_token %}
+                            <div class='container'>
+                                {% for field in profile_form %}
+                                    <div class="fieldWrapper">
+                                        <p class='text-danger'>{{ field.errors }}</p>
+                                        <label>{{ field.label }}</label>
+                                        <p>{{ field }}</p>
+                                        {% if field.help_text %}<p class='text-muted'>{{ field.help_text|safe }}</p>{% endif %}
+                                    </div>
+                                {% endfor %}
+                                {% comment %}
+                                {{ profile_form.as_p }}{% if profile_form.first_name.errors %}{% for error in profile_form.first_name.errors %}<p class='text-danger'>{{ error|escape }}</p>{% endfor %}{% endif %}
+                                {% endcomment %}
+                                <p>Зарегистрированный Емайл: <input class='form-control' disabled value="{{ user.email }}"></p>
+                            </div>
+
+                            <fieldset>
+                                <legend>Мои ссылки на другие ресурсы / соц.сети</legend>
+                                {{ link_formset.management_form }}
+                                {% for link_form in link_formset %}
+                                    <div class="link-formset">
+                                        <p>{{ link_form.anchor }}</p>
+                                        {% if link_form.anchor.errors %}{% for error in link_form.anchor.errors %}{{ error|escape }}{% endfor %}{% endif %}
+
+                                        <p>{{ link_form.url }}</p>
+                                        {% if link_form.url.errors %}{% for error in link_form.url.errors %}{{ error|escape }}{% endfor %}{% endif %}
+                                    </div>
+                                {% endfor %}
+
+                                {% if link_formset.non_form_errors %}
+                                    {% for error in link_formset.non_form_errors %}<p class='text-danger'>{{ error|escape }}</p>{% endfor %}
+                                {% endif %}
+                            </fieldset>
+                            <br>
+                            <p><input type="submit" value="Обновить профиль" class="btn_black"/></p>
+                        </form>
+                    </div>
+                </div>
+
+        {# [!] starting header - finish this #}
+            </div>
+        </div>
+
+{% endblock %}
+
+{% block additional_js %}
+    <script src="{% static 'form/jquery.formset.js' %}"></script>
+    <script>
+        $('.link-formset').formset({
+            addText: 'Добавить ссылку',
+            addCssClass: 'btn btn-default',
+            deleteText: 'x',
+            deleteCssClass: 'text-danger',
+            formCssClass: 'form-inline'
+        });
+    </script>
+{% endblock %}
+
+
+
+

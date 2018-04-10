@@ -1,0 +1,22 @@
+{% load static %}
+{% load fb_versions %}
+
+{% if home %}
+    <div class="container" data-animate="fadeInUpBig">
+        <div class="col-md-12">
+            <div class="box slideshow">
+                <h2>{{ home.title }}</h2>
+                <div class='col-md-12'>{{ home.html|safe }}</div>
+                <div id="get-inspired" class="owl-carousel owl-theme">
+                    <div class="item">
+                        {% if home.get_images.exists %}
+                            {% for i in home.get_images %}
+                                <img src="{% version i.image 'max' %}" alt="Get inspired" class="img-responsive">
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}

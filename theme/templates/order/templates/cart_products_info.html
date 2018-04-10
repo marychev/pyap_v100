@@ -1,0 +1,33 @@
+<table>
+    <thead><tr>
+        <th>#</th>
+        <th>Товар</th>
+        <th>Кол-во</th>
+        <th>Цена</th>
+        <th>Сумма</th>
+    </tr>
+    </thead>
+    <tbody>
+        {% for item in cart %}
+            {% with pi=item.product %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{% include 'cart/templates/image_product_item.html' %}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td data-label="Цена"><i class="fa fa-rub" aria-hidden="true"></i>
+                        {% if pi.price_discount > 0 %}{{ pi.price_discount|floatformat:'2' }}{% else %}{{ pi.price|floatformat:'2' }}{% endif %}
+                    </td>
+                    <td data-label="Сумма"><i class="fa fa-rub" aria-hidden="true"></i>
+                        <span id="totalProductPrice{{ pi.id }}" class='jsTotalProductPrice'>{{ item.total_price|floatformat:'2' }}</span>
+                    </td>
+                </tr>
+            {% endwith %}
+        {% endfor %}
+            <tr>
+                <td colspan="4">Общая стоимость</td>
+                <td><i class="fa fa-rub" aria-hidden="true"></i>
+                    <span class='jsTotalCartPrice'>{{ cart.get_total_price|floatformat:'2' }}</span>
+                </td>
+            </tr>
+    </tbody>
+</table>

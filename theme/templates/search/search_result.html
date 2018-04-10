@@ -1,0 +1,35 @@
+{% extends 'main.html' %}
+{% load staticfiles %}
+{% load mptt_tags %}
+{% load url_handler %}
+{% load fb_versions %}
+
+{% block title %}{{ title }}{% endblock %}
+{% block description %}{{ title }}{% endblock %}
+{% block keywords %}{{ title }}{% endblock %}
+
+{% block additional_css %}
+    <link rel="stylesheet" href="{% static 'catalog/catalog.css' %}" type="text/css" media="all">
+    <link rel="stylesheet" href="{% static 'cart/css/cart.css' %}" type="text/css" media="all">
+{% endblock %}
+
+
+{% block breadcrumbs %}{% include 'default/breadcrumbs.html' with obj=title %}{% endblock %}
+
+{% block main %}
+    {% if objects %}
+        {% include 'catalog/templates/catalog_product_list.html' %}
+    {% else %}
+        <hr>
+        <div class="container">
+            <h3> По вашему запросу ничего не найдено :(</h3>
+        </div>
+        <br><br><br><br><br>
+    {% endif %}
+{% endblock %}
+
+
+
+{% block additional_js %}
+    <script src="{% static 'cart/js/addCartForm.js' %}"></script>
+{% endblock %}

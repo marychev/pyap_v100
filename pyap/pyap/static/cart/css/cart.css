@@ -1,0 +1,31 @@
+.table_w320{
+    max-width: 320px;
+}
+.msg_add_cart{
+    position: fixed; top:0; right:0;
+    text-align: right;
+    padding: 15px 60px;
+    background-color: #1b2024;
+    cursor:pointer;
+    border: 1px solid #888;
+    line-height: 1.5;
+    color: #fff;
+    opacity: 0.9;
+    z-index: 88;
+}
+.msg_add_cart:hover{opacity: 1;}
+.del_popup{
+    position: absolute;
+    border: 1px solid #888; border-right: 0; border-top:0;
+    top:0; right: 0;
+    padding: 1px 6px;
+    font-weight: bold; color: #f66236;}
+.del_popup:hover{
+    background: #f9f9f9;
+    color: #8a6f32;
+}
+.jsAddToCart{
+    cursor: pointer;}
+#ajaxError{
+    position: fixed; bottom: 0; z-index: 88;
+}
