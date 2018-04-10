@@ -123,7 +123,7 @@ DATABASES = {
 	git commit -m 'Hello World!'
 	
 	# --settings
-	git remote add origin git@bitbucket.org:marychev/dervek.git
+	git remote add origin git@bitbucket.org:marychev/pyap_v1.0.0.git
 	git push -u origin master
 
 
