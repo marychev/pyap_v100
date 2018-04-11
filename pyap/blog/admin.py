@@ -24,6 +24,7 @@ class BlogAdmin(ABSMPTTContentSeoAdmin):
     inlines = (BlogImageInline,)
     action = (ABSMPTTContentSeoAdmin.abs_actions,)
     raw_id_fields = ABSMPTTContentSeoAdmin.abs_raw_id_fields
+    filter_horizontal = ('tags',)
     readonly_fields = ABSMPTTContentSeoAdmin.abs_readonly_fields
     search_fields = ABSMPTTContentSeoAdmin.abs_search_fields
     list_filter = ABSMPTTContentSeoAdmin.abs_list_filter
@@ -55,6 +56,7 @@ class PostAdmin(ABSContentSeoAdmin):
     inlines = (PostImageInline,)
     action = (ABSContentSeoAdmin.abs_actions,)
     raw_id_fields = ('blog',) + ABSContentSeoAdmin.abs_raw_id_fields
+    filter_horizontal = ('tags',)
     readonly_fields = ABSContentSeoAdmin.abs_readonly_fields + ('comment_count',)
     search_fields = ABSContentSeoAdmin.abs_search_fields
     list_filter = ('blog',) + ABSContentSeoAdmin.abs_list_filter
@@ -65,7 +67,8 @@ class PostAdmin(ABSContentSeoAdmin):
     custom_fieldsets = (
         ('ОСНОВНЫЕ ДАННЫЕ', {
             'fields': (
-                'blog', 'get_image_thumb', ('title', 'is_show'), 'description', 'html', 'is_allow_comments', 'author',
+                'blog', 'get_image_thumb', ('title', 'is_show'), 'description', 'html', 'is_allow_comments',
+                'author', 'tags',
             ),
         }),
         ('СЕО-НАСТРОЙКИ', {

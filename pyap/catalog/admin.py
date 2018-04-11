@@ -24,6 +24,7 @@ class CatalogAdmin(ABSDefaultMPTTAdmin, ImageAdmin, SEOAdmin):
     readonly_fields = ('get_image_thumb', 'created', 'updated')
     prepopulated_fields = {'slug': ('title',)}
     # radio_fields = {'parent': admin.VERTICAL}
+    filter_horizontal = ('tags',)
 
     search_fields = ('title', 'parent__title')
     list_filter = (
@@ -37,7 +38,7 @@ class CatalogAdmin(ABSDefaultMPTTAdmin, ImageAdmin, SEOAdmin):
     fieldsets = (
         ('ОСНОВНЫЕ ДАННЫЕ', {
             'fields': (
-                'get_image_thumb', ('title', 'is_show'), 'description', 'parent', 'html', 'sort',
+                'get_image_thumb', ('title', 'is_show'), 'description', 'parent', 'html', 'sort', 'tags'
             ),
         }),
         ('СЕО-НАСТРОЙКИ', {

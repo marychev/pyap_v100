@@ -42,7 +42,7 @@ class ProductAdmin(ImageAdmin, SEOAdmin):
     readonly_fields = ImageAdmin.abs_readonly_fields + SEOAdmin.abs_readonly_fields
     inlines = (ProductImageInline, ProductItemInline)
 
-    filter_horizontal = ('catalog', 'recommend_products')
+    filter_horizontal = ('catalog', 'recommend_products', 'tags')
     search_fields = ('title', 'articul')
     list_filter = (
         'is_show', 'is_bestseller', 'is_new', ('catalog', TreeRelatedFieldListFilter),
@@ -56,7 +56,7 @@ class ProductAdmin(ImageAdmin, SEOAdmin):
         ('ОСНОВНЫЕ ДАННЫЕ', {
             'fields': (
                 ('get_image_thumb', 'is_bestseller', 'is_new'),
-                SEOAdmin.abs_fieldsets, 'articul', 'catalog', 'recommend_products',
+                SEOAdmin.abs_fieldsets, 'articul', 'catalog', 'recommend_products', 'tags',
             ),
         }),
         ('СЕО-НАСТРОЙКИ', {

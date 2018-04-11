@@ -19,6 +19,7 @@ class GalleryAdmin(ABSDefaultMPTTAdmin, ImageAdmin, SEOAdmin):
     actions = ABSDefaultMPTTAdmin.abs_actions + ImageAdmin.abs_actions + SEOAdmin.abs_actions
     inlines = (GalleryImageInline,)
     raw_id_fields = ('parent',)
+    filter_horizontal = ('tags',)
     readonly_fields = ('get_image_thumb', 'created', 'updated')
     prepopulated_fields = {'slug': ('title',)}
     search_fields = ('title', 'parent__title')
@@ -33,7 +34,7 @@ class GalleryAdmin(ABSDefaultMPTTAdmin, ImageAdmin, SEOAdmin):
     fieldsets = (
         ('ОСНОВНЫЕ ДАННЫЕ', {
             'fields': (
-                'get_image_thumb', ('title', 'is_show'), 'parent', 'html'
+                'get_image_thumb', ('title', 'is_show'), 'parent', 'html', 'tags'
             ),
         }),
         ('СЕО-НАСТРОЙКИ', {

@@ -19,6 +19,7 @@ class PageAdmin(ABSContentSeoAdmin):
     inlines = (PageImageInline,)
     actions = ABSContentSeoAdmin.abs_actions
     raw_id_fields = ABSContentSeoAdmin.abs_raw_id_fields
+    filter_horizontal = ('tags',)
     readonly_fields = ABSContentSeoAdmin.abs_readonly_fields
     search_fields = ABSContentSeoAdmin.abs_search_fields
     list_filter = ABSContentSeoAdmin.abs_list_filter

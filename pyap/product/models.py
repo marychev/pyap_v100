@@ -36,8 +36,8 @@ class Product(ABSContentModel):
         """Удаление объекта и связаных с ним изображений"""
         if ProductImage.objects.filter(product=self).first():
             [image.delete() for image in ProductImage.objects.filter(product=self)]
-        if self.image:
-            self.image.delete()
+        if self.get_main_item():
+            self.get_main_image().image.delete()
         super(Product, self).delete(*args, **kwargs)
 
     def get_absolute_url(self):
@@ -76,7 +76,7 @@ class Product(ABSContentModel):
         Вернуть главную, или 1ю.
         """
         images = ProductImage.objects.filter(product_id=self.id)
-        if images:
+        if images.exists():
             image = images.first()
             if images.filter(image_is_main=True).exists():
                 image = images.filter(image_is_main=True).first()

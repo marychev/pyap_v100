@@ -157,7 +157,7 @@ class ABSContentSeoAdmin(ImageAdmin, SEOAdmin):
     abs_fieldsets = (
         ('ОСНОВНЫЕ ДАННЫЕ', {
             'fields': (
-                'get_image_thumb', ('title', 'is_show'), 'description', 'html', 'author', 'is_allow_comments',
+                'get_image_thumb', ('title', 'is_show'), 'description', 'html', 'author', 'is_allow_comments', 'tags'
             ),
         }),
         ('СЕО-НАСТРОЙКИ', {
@@ -190,7 +190,7 @@ class ABSMPTTContentSeoAdmin(MPTTModelAdmin, ImageAdmin, SEOAdmin):
     abs_fieldsets = (
         ('ОСНОВНЫЕ ДАННЫЕ', {
             'fields': (
-                'get_image_thumb', ('title', 'is_show'), 'parent', 'description', 'html', 'author',
+                'get_image_thumb', ('title', 'is_show'), 'parent', 'description', 'html', 'author', 'tags'
             ),
         }),
         ('СЕО-НАСТРОЙКИ', {
