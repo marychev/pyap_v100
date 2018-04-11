@@ -37,11 +37,10 @@
 
             {% include 'default/next_prev.html' with type='post' %}
 
-    {% if post.is_allow_comments %}
-        {% include 'default/comment_list.html' with comments=comments title='Все коментарии' %}
-        <hr>
-        {% include 'blog/templates/form_comment.html' %}
-    {% endif %}
+            {% if post.is_allow_comments %}
+                {% include 'default/comment_list.html' %}
+                {% include 'default/form_comment.html' with type='post' %}
+            {% endif %}
         </div>
     </div>
 

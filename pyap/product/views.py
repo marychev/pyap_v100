@@ -30,7 +30,7 @@ class ProductDetail(MainPageMixin, TemplateView):
         comment_form = CommentForm(initial=initial)
 
         context['comment_form'] = comment_form
-        context['review_products'] = ProductComment.objects.filter(
+        context['comments'] = ProductComment.objects.filter(
             is_show=True, product_id=context['product'].id)
         context['catalog'] = get_object_or_404(Catalog, slug=kwargs['catalog'])
         context['cart_product_form'] = CartAddProductForm()
@@ -76,7 +76,7 @@ class ProductDetail(MainPageMixin, TemplateView):
         comment_form = CommentForm(initial=initial)
 
         context['comment_form'] = comment_form
-        context['review_products'] = ProductComment.objects.filter(is_show=True, product_id=context['product'].id)
+        context['comments'] = ProductComment.objects.filter(is_show=True, product_id=context['product'].id)
         context['catalog'] = context['product'].catalog.first()
         context['cart_product_form'] = CartAddProductForm()
         context['next_prev'] = get_next_prev(Product, context['product'])
@@ -97,7 +97,7 @@ class ProductCommentView(MainPageMixin, TemplateView):
         review_form = CommentForm(request.POST)
         if review_form.is_valid():
             review_form.save()
-            messages.success(request, ':) Спасибо! Отзыв принят.')
+            messages.success(request, ':) Спасибо! Комментарий оставлен.')
         else:
             messages.error(request, '(: Произошла ошибка при отправке отзыва.')
         return redirect(obj.get_absolute_url())

@@ -1,0 +1,16 @@
+<div id="comment-form" data-animate="fadeInUp">
+    <h4>Оставтье свой комментарий</h4>
+    {% if 'page' in type %}
+    <form method="post" action="{% url 'page:page_comment' object.id %}">{% csrf_token %}
+    {% elif 'post' in type %}
+    <form method="post" action="">{% csrf_token %}
+    {% else %}
+    <form method="post" action="{% url 'product:product_comment' product_id=product.id %}">{% csrf_token %}
+    {% endif %}
+        <div class="row">
+            <div class='alert-danger'>{{ comment_form.errors }}</div>
+            <div class='col-md-8'>{{ comment_form.as_p }}</div>
+        </div>
+        <button type="submit" class="btn btn-primary"><i class="fa fa-comment-o"></i>Оставить коментарий</button>
+    </form>
+</div>

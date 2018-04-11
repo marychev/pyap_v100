@@ -148,11 +148,9 @@
           filter: blur(5px);
 }
 
-.btn, .panel, .pagination li a, button, select, input{
+.form-control, .btn, .panel, .pagination li a, button, select, input{
 	border-radius: 0!important;
 }
-
-
 
 ul.messages{
 	position: fixed;

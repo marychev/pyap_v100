@@ -26,7 +26,7 @@
     <div class="row" id="productMain">
         <div class="col-sm-6">
             <div id="mainImage">
-                <img src="{% version product.get_main_image.image 'large' %}" alt="" class="img-responsive">
+                <img src="{% version product.get_main_image.image 'large' %}" alt="{{ product.get_main_image.image_tile }}" title="{{ product.get_main_image.image_title }}" class="img-responsive">
             </div>
             {# --- line bestseller AND new product --- #}
             {% if product.is_new %}
@@ -53,12 +53,8 @@
                 <hr>
 
                 {% include 'product/templates/productl_form_add_cart.html' %}
-
 {#                    <a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add to cart</a>#}
 {#                    <a href="basket.html" class="btn btn-default"><i class="fa fa-heart"></i> Add to wishlist</a>#}
-
-
-
             </div>
 
             {% if product.get_images.exists %}
@@ -83,6 +79,12 @@
             <div class="content">{{ product.html|safe }}</div>
         {% endif %}
     </div>
+
+    <div class='box'>
+        {% include 'default/comment_list.html' %}<br>
+        {% include 'default/form_comment.html' %}
+    </div>
+
 
     {% include 'product/templates/item_bestseller_product.html' with objects=product.recommend_products.all title='Похожие товары' %}
 

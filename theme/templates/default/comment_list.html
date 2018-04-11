@@ -1,37 +1,23 @@
-{% if comments %}
-    <section id="testimonials-slider" class="no-bg">
-        <div class="center">
-            <div class="section-title">
-                <p class="subtitle">Что говорят наши клиенты</p>
-                <h3 class="pr-font">{{ title }}</h3>
+{% if comments.exists %}
+{% load fb_versions %}
+<div class="row comment last">
+    {% for comment in comments %}
+        {% if comment.user and comment.user.userprofile.avatar %}
+            <div class="col-sm-3 col-md-2 text-center-xs">
+                <p><img src="{% version comment.user.userprofile.avatar 'thumbnail' %}" class="img-responsive img-circle" alt=""></p>
             </div>
+        {% endif %}
 
-            <div class="swiper-container swiper-container-horizontal">
-                <div class="swiper-wrapper" style="transform: translate3d(-1170px, 0px, 0px); transition-duration: 0ms;">
-                    {% for comment in comments %}
-                        <div class="swiper-slide {% if forloop.first in 'True' %}swiper-slide-active{% endif %}">
-                            <div class="center">
-                                <div class="content">
-                                    <i class="fa fa-quote-left" aria-hidden="true"></i>
-                                    <blockquote><p>{{ comment.text|truncatewords:80}}</p></blockquote>
-                                    <h5>{{ comment.username }}</h5>
-                                    <small>
-                                        <time itemprop="dateCreated" datetime="{{ comment.created|date:'Y-m-d H:i:s' }}">{{ comment.created|date:'d/m/Y' }}</time>
-                                    </small>
-                                </div>
-                            </div>
-                        </div>
-                    {% empty %}
-                        <p>Коментариев нет...</p>
-                    {% endfor %}
-                </div>
-                <div class="nav">
-                    <span class="prev fa fa-caret-left"></span>
-                    <span class="next fa fa-caret-right"></span>
-                </div>
-            </div>
-
-
+        <div class="col-sm-9 col-md-10">
+            <h5>{{ comment.username }}</h5>
+            <p class="posted"><i class="fa fa-clock-o"></i> <time itemprop="dateCreated" datetime="{{ comment.created|date:'Y-m-d H:i:s' }}">{{ comment.created|date:'d/m/Y' }}</time></p>
+            <p>{{ comment.text|truncatewords:80}}</p>
+{#            <p class="reply"><a href="#"><i class="fa fa-reply"></i> Reply</a></p>#}
         </div>
-    </section>
+        {% empty %}
+        <p>Коментариев нет...</p>
+    {% endfor %}
+</div>
+
+
 {% endif %}

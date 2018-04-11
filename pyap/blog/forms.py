@@ -18,3 +18,7 @@ class CommentForm(ABSCommentForm):
     class Meta:
         model = Comment
         exclude = ('is_show',)
+        widgets = {
+            'email': forms.TextInput(attrs={'class': 'form-control'}),
+            'text': forms.Textarea(attrs={'class': 'form-control', 'rows': 4}),
+        }

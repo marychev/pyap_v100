@@ -118,7 +118,7 @@ class ABSCommentModel(CreatedUpdatedModel):
     """
     Коментарии к к объекту, Например коментирование поста, или пользователя
     """
-    text = models.TextField(verbose_name='Сообщения')
+    text = models.TextField(verbose_name='Комментарий')
     ip_address = models.GenericIPAddressField(default='0.0.0.0', verbose_name='IP address', null=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, verbose_name='Пользователь')
     username = models.CharField(max_length=125, default='anonymous', blank=True, null=True, verbose_name='Имя пользователя')
