@@ -2,6 +2,7 @@ from django.db import models
 from django.core.urlresolvers import reverse
 from mptt.models import MPTTModel, TreeForeignKey
 from utils.abstract_model import ABSContentModel, ABSImageModel
+from site_info.models import Tag
 
 
 class Catalog(MPTTModel, ABSContentModel):
@@ -11,6 +12,7 @@ class Catalog(MPTTModel, ABSContentModel):
 
     parent = TreeForeignKey(
         'self', null=True, related_name='subitems', blank=True, db_index=True, verbose_name='Родительская категория')
+    tags = models.ManyToManyField(Tag, verbose_name='Тэги', blank=True)
 
     # ---------------------------------------------------------------------------------
     # [!] Повторяются методы, если у модельи есть привязка к модели его фотографий ---

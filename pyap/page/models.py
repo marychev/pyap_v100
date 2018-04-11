@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.urlresolvers import reverse
 from utils.abstract_model import ABSContentModel, ABSImageModel, ABSCommentModel
+from site_info.models import Tag
 
 
 class Page(ABSContentModel):
@@ -8,6 +9,7 @@ class Page(ABSContentModel):
     Модель для контент-страниц, таких как О нас, Контакты...
     """
     is_allow_comments = models.BooleanField(default=False, verbose_name='разрешить комментарии')
+    tags = models.ManyToManyField(Tag, verbose_name='Тэги', blank=True)
 
     class Meta:
         unique_together = ('slug', 'created')

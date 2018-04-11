@@ -2,6 +2,7 @@ from django.db import models
 from django.core.urlresolvers import reverse
 from mptt.models import MPTTModel, TreeForeignKey
 from utils.abstract_model import ABSContentModel, ABSImageModel
+from site_info.models import Tag
 
 
 class Gallery(MPTTModel, ABSContentModel):
@@ -10,6 +11,7 @@ class Gallery(MPTTModel, ABSContentModel):
     Применение: подходит для создания различного рода вывода массого списка изображений.
     """
     parent = TreeForeignKey('self', blank=True, null=True, related_name='subitems', db_index=True, verbose_name='Галерея-родитель')
+    tags = models.ManyToManyField(Tag, verbose_name='Тэги', blank=True)
 
     def __str__(self):
         return self.title

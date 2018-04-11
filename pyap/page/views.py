@@ -2,6 +2,8 @@ from django.views.generic.base import TemplateView
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib import messages
 from generic.mixins import MainPageMixin
+from utils.leftbar import get_leftbar
+from blog.models import Blog
 from .models import Page, PageComment
 from .forms import CommentForm
 
@@ -18,6 +20,7 @@ class PageView(MainPageMixin, TemplateView):
         }
         comment_form = CommentForm(initial=initial)
         context['comment_form'] = comment_form
+        context['leftbar'] = get_leftbar(Blog, Blog.objects.first())
         return context
 
 

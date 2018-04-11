@@ -1,44 +1,27 @@
 {% load mptt_tags %}
 
     <div class="col-md-3">
-                    <!-- *** MENUS AND FILTERS ***
- _________________________________________________________ -->
-            <div class="panel panel-default sidebar-menu">
+        <div class="panel panel-default sidebar-menu">
+            <div class="panel-heading"><h3 class="panel-title"> {{ leftbar.root_obj.title }}</h3></div>
 
-                <div class="panel-heading">
-                    <h3 class="panel-title"> {{ leftbar.root_obj.title }}</h3>
-                </div>
-
-                <div class="panel-body">
-                    <ul class="nav nav-pills nav-stacked category-menu">
-{#                        <li>#}
-{#                            <a href="category.html">Men <span class="badge pull-right">42</span></a>#}
-{#                            <ul>#}
-{#                                <li><a href="category.html">T-shirts</a>#}
-{#                                </li>#}
-{#                                <li><a href="category.html">Shirts</a>#}
-{#                                </li>#}
-{#                                <li><a href="category.html">Pants</a>#}
-{#                                </li>#}
-{#                                <li><a href="category.html">Accessories</a>#}
-{#                                </li>#}
-{#                            </ul>#}
-{#                        </li>#}
-                        {% if leftbar.obj_list %}
-                            {% recursetree leftbar.obj_list %}
-                                <li class='{% if not node.is_leaf_node %}has-sub parent {% endif %}{% if leftbar.obj.title == node.title %}active open{% endif %}'>
-                                    <a href="{{ node.get_absolute_url }}">{{ node.title }}
+            <div class="panel-body">
+                <ul class="nav nav-pills nav-stacked category-menu">
+                    {% if leftbar.obj_list %}
+                        {% recursetree leftbar.obj_list %}
+                            <li class='{% if not node.is_leaf_node %}has-sub parent {% endif %}{% if leftbar.obj.title == node.title %}active open{% endif %}'>
+                                <a href="{{ node.get_absolute_url }}">{{ node.title }}
                                     {% if leftbar.obj.title == node.title %}<span class="badge pull-right">{{ objects|length }}</span>{% endif %}</a>
                                     {% if not node.is_leaf_node %}
                                         <ul class="children{{ node.is_child_node }}">{{ children }}</ul>
                                     {% endif %}
-                                </li>
-                            {% endrecursetree %}
-                        {% endif %}
-                    </ul>
+                            </li>
+                        {% endrecursetree %}
+                    {% endif %}
+                </ul>
 
-                </div>
             </div>
+        </div>
+    </div>
 
 {#            <div class="panel panel-default sidebar-menu">#}
 {##}
@@ -130,6 +113,5 @@
 {#                    <img src="img/banner.jpg" alt="sales 2014" class="img-responsive">#}
 {#                </a>#}
 {#            </div>#}
-        </div>
 
 

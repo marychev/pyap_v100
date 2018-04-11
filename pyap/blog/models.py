@@ -4,6 +4,7 @@ from django.db.models.signals import post_save
 from utils.abstract_model import ABSContentModel, ABSImageModel, ABSCommentModel
 from mptt.models import MPTTModel, TreeForeignKey
 from users.models import User
+from site_info.models import Tag
 from .signals import save_comment
 
 
@@ -14,7 +15,8 @@ class Blog(MPTTModel, ABSContentModel):
     parent = TreeForeignKey(
         'self', null=True, related_name='subitems', blank=True, db_index=True, verbose_name='Родительский блог',
         on_delete=models.SET_NULL)
-    author = models.ForeignKey(User, verbose_name='Автор',blank=True, null=True)
+    # author = models.ForeignKey(User, verbose_name='Автор', blank=True, null=True)
+    tags = models.ManyToManyField(Tag, verbose_name='Тэги', blank=True)
 
     # ---------------------------------------------------------------------------------
     # [!] Повторяются методы, если у модельи есть привязка к модели его фотографий ---
@@ -75,7 +77,8 @@ class Post(ABSContentModel):
     Посты для блога
     """
     blog = models.ForeignKey(Blog, verbose_name='Блог', blank=True, null=True, on_delete=models.SET_NULL)
-    author = models.ForeignKey(User, verbose_name='Автор', null=True, blank=True, on_delete=models.SET_NULL)
+    # author = models.ForeignKey(User, verbose_name='Автор', null=True, blank=True, on_delete=models.SET_NULL)
+    tags = models.ManyToManyField(Tag, verbose_name='Тэги', blank=True)
     is_allow_comments = models.BooleanField(default=True, verbose_name='разрешить комментарии')
     comment_count = models.IntegerField(blank=True, default=0, verbose_name='Кол-во коментариев')
 

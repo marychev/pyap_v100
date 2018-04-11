@@ -71,3 +71,18 @@ class SocialNetwork(ABSImageModel):
     class Meta:
         verbose_name = 'социальная сеть'
         verbose_name_plural = 'социальные сети'
+
+
+class Tag(models.Model):
+    """
+    Тэги
+    """
+    title = models.CharField(max_length=255, verbose_name='Название')
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        ordering = ('title',)
+        verbose_name = 'Тэг'
+        verbose_name_plural = 'Тэги'

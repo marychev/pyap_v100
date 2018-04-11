@@ -3,6 +3,7 @@ from django.db import models
 from django.core.validators import MinValueValidator
 from django.core.urlresolvers import reverse
 from catalog.models import Catalog
+from site_info.models import Tag
 from utils.abstract_model import ABSContentModel, CreatedUpdatedModel, ABSImageModel, ABSCommentModel
 from utils.translit_field import translaton_field
 # from django.db.models.signals import post_save
@@ -20,6 +21,7 @@ class Product(ABSContentModel):
     recommend_products = models.ManyToManyField(
         'self', verbose_name='Рекомендованные/Похожие', blank=True, limit_choices_to={'is_show': True},
         help_text='Отображаются внизу карточки товара, как рекомендованные или похожие товары')
+    tags = models.ManyToManyField(Tag, verbose_name='Тэги', blank=True)
 
     def __str__(self):
         return self.title
