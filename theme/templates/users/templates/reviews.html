@@ -1,6 +1,6 @@
 {% extends 'main.html' %}
 {% load staticfiles %}
-{#{% load thumbnail %}#}
+
 {% load fb_versions %}
 
 {% block title %}Мои Отзывы{% endblock %}
@@ -9,59 +9,48 @@
 
 {% block additional_css %}{% endblock %}
 
-{% block header %}
-    {% include 'default/header.html' %}
-{% endblock %}
+{% block breadcrumbs %}{% include 'default/breadcrumbs.html' with obj='Настройки аккаунта' %}{% endblock %}
+{% block leftbar %}{% include 'users/templates/left_panel.html' %}{% endblock %}
 
-{% block leftbar %}
-    <div id="layout" class="wide">
-        <div id="container">
-            <div id="content" class="center">
-                <div class='dervek-my-account'>
-                    {% include 'users/templates/left_panel.html' %}
-{% endblock %}
 
 {% block main %}
-                    <div class="dervek-MyAccount-content">
-                        <div class="section-title">
-                            <p class="subtitle">***</p>
-                            <h3 class="pr-font">Мои Отзывы</h3>
-                        </div>
-
-                        <table class="table table-responsive">
-                            <thead><tr>
-                                <th>Товар</th>
-                                <th>Отзыв</th>
-                                <th>Дата</th>
-                                <th>#</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% with reviews=review_products %}
-                                {% for review in reviews %}
-                                    <tr class="spaceUnder">
-                                        <td>
-                                            <a href="{{ review.product.get_absolute_url }}">
-                                                    <img src="{% version review.product.get_main_image.image 'thumbnail' %}" alt="{{ review.product.title }}">
-                                                <p class='small'>{{ review.product.title }}<br>
-                                                <small class='text-muted'>[Арткул: {{ review.product.articul }}]</small>
-                                            </a>
-                                        </td>
-                                        <td><i class='small'>{{ review.text }}</i></td>
-                                        <td class='small'>{{ review.created }}</td>
-                                        <td>{% if review.is_show %}Опубликован{% else %}...проходит модерацию{% endif %}</td>
-                                    </tr>
-                                {% empty %}
-                                    <p> <span class="info-text">Отзывов пока нет.</span> :(</p>
-                                {% endfor %}
-                            {% endwith %}
-                            </tbody>
-                        </table><br>
-                    </div>
-                </div>
-            </div>
+    <div class="col-md-9">
+        <div class="box" id="text-page">
+            <h1>Мои Отзывы <span class="badge">{{ review_products|length }}</span></h1>
+            <table class="table table-responsive">
+                <thead><tr>
+                    <th>Товар</th>
+                    <th>Отзыв</th>
+                    <th>Дата</th>
+                    <th>#</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% with reviews=review_products %}
+                    {% for review in reviews %}
+                        <tr class="spaceUnder">
+                            <td>
+                                <a href="{{ review.product.get_absolute_url }}">
+                                        <img src="{% version review.product.get_main_image.image 'thumbnail' %}" alt="{{ review.product.title }}">
+                                    <p class='small'>{{ review.product.title }}<br>
+                                    <small class='text-muted'>[Арткул: {{ review.product.articul }}]</small>
+                                </a>
+                            </td>
+                            <td>{{ review.text }}</td>
+                            <td class='small'>{{ review.created }}</td>
+                            <td>{% if review.is_show %}Опубликован{% else %}...проходит модерацию{% endif %}</td>
+                        </tr>
+                    {% empty %}
+                        <p> <span class="info-text">Отзывов пока нет.</span> :(</p>
+                    {% endfor %}
+                {% endwith %}
+                </tbody>
+            </table>
         </div>
     </div>
+
+
+
 {% endblock %}
 
 {% block additional_js %}{% endblock %}

@@ -1,23 +1,28 @@
-<nav class='dervek-MyAccount-navigation'>
-    <h4><i class="fa fa-user" aria-hidden="true"></i> Мой аккаунт</h4>
-    <ul>
-        {% if request.user %}
-        <li>
-            <a href="{% url 'users:profile' %}" {% if current_url == '/users/profile/' %}class='text-danger'{% endif %}>
-                <i class="fa fa-cogs" aria-hidden="true"></i> Настройки аккаунта
-            </a>
-        </li>
-        {% endif %}
-        <li>
-            <a href="{% url 'users:orders' %}" {% if current_url == '/users/orders/' %}class='text-danger'{% endif %}>
-                <i class="fa fa-folder-open" aria-hidden="true"></i> Мои заказы
-            </a>
-        </li>
-        <li>
-            <a href="{% url 'users:review_products' %}" {% if current_url == '/users/review/products/' %}class='text-danger'{% endif %}>
-                <i class="fa fa-credit-card" aria-hidden="true"></i> Мои Отзывы
-            </a>
-        </li>
-        <li><a href="{% url 'users:logout' %}"><i class="fa fa-sign-out" aria-hidden="true"></i> Выход</a></li>
-    </ul>
-</nav>
+<div class="col-md-3">
+    <div class="panel panel-default sidebar-menu">
+        <div class="panel-heading"><h3 class="panel-title"> Мой аккаунт</h3></div>
+        <div class="panel-body">
+            <ul class="nav nav-pills nav-stacked category-menu">
+                {% if request.user %}
+                <li {% if current_url == '/users/profile/' %}class='active'{% endif %}>
+                    <a href="{% url 'users:profile' %}">
+                        <i class="fa fa-cogs" aria-hidden="true"></i> Настройки аккаунта
+                    </a>
+                </li>
+                {% endif %}
+                <li {% if current_url == '/users/orders/' %}class='active'{% endif %}>
+                    <a href="{% url 'users:orders' %}">
+                        <i class="fa fa-folder-open" aria-hidden="true"></i> Мои заказы
+                    </a>
+                </li>
+                <li {% if current_url == '/users/review/products/' %}class='active'{% endif %}>
+                    <a href="{% url 'users:review_products' %}">
+                        <i class="fa fa-credit-card" aria-hidden="true"></i> Мои Отзывы
+                    </a>
+                </li>
+                <li><a href="{% url 'users:logout' %}"><i class="fa fa-sign-out" aria-hidden="true"></i> Выход</a></li>
+            </ul>
+
+        </div>
+    </div>
+</div>

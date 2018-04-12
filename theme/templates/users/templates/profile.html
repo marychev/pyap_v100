@@ -7,70 +7,59 @@
 
 {% block additional_css %}{% endblock %}
 
-{% block header %}
-    {% include 'default/header.html' %}
-{% endblock %}
-
-{% block leftbar %}
-    <div id="layout" class="wide">
-        <div id="container">
-            <div id="content" class="center">
-
-                <div class='dervek-my-account'>
-                    {% include 'users/templates/left_panel.html' %}
-{% endblock %}
+{% block breadcrumbs %}{% include 'default/breadcrumbs.html' with obj='Настройки аккаунта' %}{% endblock %}
+{% block leftbar %}{% include 'users/templates/left_panel.html' %}{% endblock %}
 
 
 {% block main %}
-                    <div class='dervek-MyAccount-content'>
-                        <div class="section-title">
-                            <p class="subtitle">***</p>
-                            <h3 class="pr-font">Настройки аккаунта</h3>
-                        </div>
-                        {{ form.errors }}
-                        <form method="post">{% csrf_token %}
-                            <div class='container'>
-                                {% for field in profile_form %}
-                                    <div class="fieldWrapper">
-                                        <p class='text-danger'>{{ field.errors }}</p>
-                                        <label>{{ field.label }}</label>
-                                        <p>{{ field }}</p>
-                                        {% if field.help_text %}<p class='text-muted'>{{ field.help_text|safe }}</p>{% endif %}
-                                    </div>
-                                {% endfor %}
-                                {% comment %}
-                                {{ profile_form.as_p }}{% if profile_form.first_name.errors %}{% for error in profile_form.first_name.errors %}<p class='text-danger'>{{ error|escape }}</p>{% endfor %}{% endif %}
-                                {% endcomment %}
-                                <p>Зарегистрированный Емайл: <input class='form-control' disabled value="{{ user.email }}"></p>
-                            </div>
-
-                            <fieldset>
-                                <legend>Мои ссылки на другие ресурсы / соц.сети</legend>
-                                {{ link_formset.management_form }}
-                                {% for link_form in link_formset %}
-                                    <div class="link-formset">
-                                        <p>{{ link_form.anchor }}</p>
-                                        {% if link_form.anchor.errors %}{% for error in link_form.anchor.errors %}{{ error|escape }}{% endfor %}{% endif %}
-
-                                        <p>{{ link_form.url }}</p>
-                                        {% if link_form.url.errors %}{% for error in link_form.url.errors %}{{ error|escape }}{% endfor %}{% endif %}
-                                    </div>
-                                {% endfor %}
-
-                                {% if link_formset.non_form_errors %}
-                                    {% for error in link_formset.non_form_errors %}<p class='text-danger'>{{ error|escape }}</p>{% endfor %}
-                                {% endif %}
-                            </fieldset>
-                            <br>
-                            <p><input type="submit" value="Обновить профиль" class="btn_black"/></p>
-                        </form>
-                    </div>
+    <div class="col-md-9">
+        <div class="box" id="text-page">
+        <h1>Настройки аккаунта</h1>
+        {{ profile_form.errors }}
+        <form method="post" class="row">{% csrf_token %}
+            <div class="col-md-10">
+                <p class="lead">Основные данные</p>
+                {% for field in profile_form %}
+                <div class="fieldWrapper">
+                    <p class='text-danger'>{{ field.errors }}</p>
+                    <label>{{ field.label }}</label>
+                    <p>{{ field }}</p>
+                    {% if field.help_text %}<p class='text-muted'>{{ field.help_text|safe }}</p>{% endif %}
                 </div>
-
-        {# [!] starting header - finish this #}
+                {% endfor %}
+                {% comment %}
+                {{ profile_form.as_p }}
+                    {% if profile_form.first_name.errors %}
+                        {% for error in profile_form.first_name.errors %}
+                            <p class='text-danger'>{{ error|escape }}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endcomment %}
+                <p>Зарегистрированный Емайл: <input class='form-control' disabled value="{{ user.email }}"></p>
             </div>
-        </div>
 
+            <div class="col-md-8">
+                <p class="lead">Мои ссылки на соц.сети/др.ресурсы</p>
+                {{ link_formset.management_form }}
+                {% for link_form in link_formset %}
+                    <div class="link-formset">
+                        <p>{{ link_form.anchor }}</p>
+                        {% if link_form.anchor.errors %}{% for error in link_form.anchor.errors %}{{ error|escape }}{% endfor %}{% endif %}
+
+                        <p>{{ link_form.url }}</p>
+                        {% if link_form.url.errors %}{% for error in link_form.url.errors %}{{ error|escape }}{% endfor %}{% endif %}
+                    </div>
+                {% endfor %}
+
+                {% if link_formset.non_form_errors %}
+                    {% for error in link_formset.non_form_errors %}<p class='text-danger'>{{ error|escape }}</p>{% endfor %}
+                {% endif %}
+                <p><br></p>
+                <p><input type="submit" value="Обновить профиль" class="btn btn-block btn-lg btn-primary"/></p>
+            </div>
+        </form>
+    </div>
+    </div>
 {% endblock %}
 
 {% block additional_js %}
@@ -80,8 +69,8 @@
             addText: 'Добавить ссылку',
             addCssClass: 'btn btn-default',
             deleteText: 'x',
-            deleteCssClass: 'text-danger',
-            formCssClass: 'form-inline'
+            deleteCssClass: 'dynamic-form_del'
+            // formCssClass: 'form-inline'
         });
     </script>
 {% endblock %}

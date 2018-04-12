@@ -79,6 +79,7 @@
     top: -13px;
     right: -2px;
 }
+
 .primary-menu .menu-item-has-children .menu-item-has-children > a:after {
 	    content: '.';
     display: inline-block;
@@ -154,6 +155,16 @@
 .form-control, .btn, .panel, .pagination li a, button, select, input{
 	border-radius: 0!important;
 }
+
+.dynamic-form_del{
+	position: absolute;
+    right: 3%;
+    top: 10%;
+    padding: 0 6px;
+    color: #fff;
+    background: #a94442;
+}
+
 
 ul.messages{
 	position: fixed;
