@@ -6,7 +6,6 @@
 {% block description %}{{ object.seo_description }}{% endblock %}
 {% block keywords %}{{ object.seo_keywors }}{% endblock %}
 
-
 {% block breadcrumbs %}{% include 'default/breadcrumbs.html' with obj=object %}{% endblock %}
 {% block leftbar %}{% include 'default/leftbar.html' %}{% endblock %}
 
@@ -37,10 +36,10 @@
             </div>
 
         {% endif %}
+        {% if object.scripts %}{{ object.scripts|safe }}{% endif %}
     </div>
     <!-- /.col-md-9 -->
 
-    {% if object.scripts %}{{ object.scripts|safe }}{% endif %}
 
 
 {% endblock %}

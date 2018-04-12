@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from filebrowser.models import FileBrowser
 from filebrowser.settings import SHOW_IN_DASHBOARD
-from site_info.models import TextInfo, ListLink
+from site_info.models import TextInfo, ListLink, Tag
 from utils.abstract_admin import DefaultSettings
 
 
@@ -59,6 +59,8 @@ class ListLinkAdmin(DefaultSettings):
     fields = (('title', 'is_show'), 'sort', 'url', 'type_link')
 
 
-
-
+@admin.register(Tag)
+class TagAdmin(DefaultSettings):
+    menu_title = 'Тэги'
+    menu_group = 'Настройки'
 

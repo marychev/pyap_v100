@@ -70,11 +70,14 @@
 }
 .dropdown-toggle:after,
 .primary-menu .menu-item-has-children > a:after {
-	content: '.';
+    content: '.';
     display: inline-block;
     margin-left: 5px;
     font-size: 3em;
     vertical-align: super;
+    position: absolute;
+    top: -13px;
+    right: -2px;
 }
 .primary-menu .menu-item-has-children .menu-item-has-children > a:after {
 	    content: '.';
