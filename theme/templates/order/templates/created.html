@@ -5,27 +5,15 @@
 {% block keywords %}Спасибо за заказ{% endblock %}
 
 
-{% comment %}
-----------------
-{% block additional_css %}<link rel="stylesheet" type="text/css" href="{% static 'cart/css/cart.css' %}"/>{% endblock %}
-{% block breadcrumbs %}{% include 'default/breadcrumbs.html' with tree=leftbar.obj.get_ancestors obj=blog %}{% endblock %}
-{% block leftbar %}{% include 'default/leftbar.html' with leftbar=leftbar %}{% endblock %}
-------------
-{% endcomment %}
 
 {% block main %}
-    <div id="layout" class="wide">
-        <div id="container">
-            <div id="content" class="center">
-                <div class="post-12 page type-page status-publish hentry">
-                    <div class="dervek">
-                        <br><br><br><h1>Заказ оформлен!</h1><hr>
-                        <h3>Номер вашего заказа: <b># {{ pk }}</b></h3>
-                        <a class='btn-black' href="{% url 'users:order_detail' pk %}">Перейти</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="col-md-9">
+        <div id="text-page" class="box">
+        <h1>Заказ оформлен!</h1><hr>
+        <h3>Номер вашего заказа: <b># {{ pk }}</b></h3>
+        <a class='btn btn-primary' href="{% url 'users:order_detail' pk %}">Перейти к заказу</a>
     </div>
+</div>
+
 
 {% endblock %}

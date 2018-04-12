@@ -7,32 +7,30 @@
 {% block description %}{% endblock %}
 {% block keywords %}{% endblock %}
 
+{% block breadcrumbs %}{% include 'default/breadcrumbs.html' with obj='Оформление заказа' %}{% endblock %}
+
 
 {% block main %}
-
-    <div id="layout" class="wide">
-        <div id="container">
-            <div id="content" class="center">
-
-                <div class="post-12 page type-page status-publish hentry">
-                    <div class="dervek">
-                        <br><br><br><h1>Оформление заказа</h1><hr>
-                        {% include 'order/templates/cart_products_info.html' %}
-                    </div>
-                    <p><span>Итоговая сумма: </span><b>{{ cart.get_total_price|floatformat:'2' }}</b></p>
-                    <fieldset>
-                        <legend>Заполните данные, чтобы оформить заказ</legend>
-                        <form method="POST">
-                            {% csrf_token %}
-                            {{ form.as_p }}<br>
-                            {{ form.errors }}
-                            <button type="submit" class='btn-black'>Заказать</button>
-                    {#         <label for="agreeServices"><input id="agreeServices" type="checkbox">Согласен с условиями обслуживания</label>#}
-                        </form>
-                    </fieldset>
-                </div>
-            </div>
+    <div class="col-md-9">
+        <div id='text-page' class="box">
+            <h1>Оформление заказа</h1>
+            {% include 'order/templates/cart_products_info.html' %}
+            <p><span>Итоговая сумма: </span><b>{{ cart.get_total_price|floatformat:'2' }}</b></p>
+            <fieldset>
+                <legend>Заполните данные, чтобы оформить заказ</legend>
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}<br>
+                    {{ form.errors }}
+                    <button type="submit" class='btn btn-primary btn-lg btn-block'>Заказать</button>
+            {#         <label for="agreeServices"><input id="agreeServices" type="checkbox">Согласен с условиями обслуживания</label>#}
+                </form>
+            </fieldset>
         </div>
+
     </div>
+
+
+
 
 {% endblock %}

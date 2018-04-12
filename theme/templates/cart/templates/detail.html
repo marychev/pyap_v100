@@ -8,80 +8,71 @@
 {% block description %}Корзина{% endblock %}
 {% block keywords %}Корзина{% endblock %}
 
-
-{% comment %}
-----------------
-{% block additional_css %}<link rel="stylesheet" type="text/css" href="{% static 'cart/css/cart.css' %}"/>{% endblock %}
-{% block breadcrumbs %}{% include 'default/breadcrumbs.html' with tree=leftbar.obj.get_ancestors obj=blog %}{% endblock %}
-{% block leftbar %}{% include 'default/leftbar.html' with leftbar=leftbar %}{% endblock %}
-------------
-{% endcomment %}
+{% block breadcrumbs %}{% include 'default/breadcrumbs.html' with obj='Корзина' %}{% endblock %}
 
 
 {% block main %}
-    <div id="layout" class="wide">
-        <div id="container">
-            <div id="content" class="center">
-                <div class="post-12 page type-page status-publish hentry">
-                    <div class="dervek">
-                        <br><br><br><h1>Корзина</h1><hr>
-                        <div class="basket-title">
-                            {% if not cart|length %}<p class='text-center'>Ваша корзина пуста :( </p>{% endif %}
-                        </div>
+    <div class='col-md-9'>
+        <div class='box' id="text-page">
 
-                        {% if cart|length %}
-                            <form action="" method="post" id="editCartForm">{% csrf_token %}
-                                <table class="table table-responsive">
-                                    <thead><tr>
-                                        <th>#</th>
-                                        <th>Товар</th>
-                                        <th>Кол-во</th>
-                                        <th>Цена</th>
-                                        <th>Сумма</th>
-                                    <th>x</th></tr>
-                                    </thead>
-                                    <tbody>
-                                        {% for item in cart %}
-                                        {% with pi=item.product %}
-                                            <tr class="spaceUnder">
-                                                <td>{{ forloop.counter }}</td>
-                                                <td>
-                                                    {% include 'cart/templates/image_product_item.html' %}
-                                                </td>
-                                                <td>
-                                                    <input class="form-control" id="quantity_id_{{ pi.id }}" min="0" name="quantity" type="number" value="{{ item.quantity }}" required>
-                                                </td>
-                                                <td data-label="Цена"><i class="fa fa-rub" aria-hidden="true"></i>
-                                                    {% if pi.price_discount > 0 %}{{ pi.price_discount|floatformat:'2' }}{% else %}{{ pi.price|floatformat:'2' }}{% endif %}
-                                                </td>
-                                                <td data-label="Сумма"><i class="fa fa-rub" aria-hidden="true"></i>
-                                                    <span id="totalProductPrice{{ pi.id }}" class='jsTotalProductPrice'>{{ item.total_price|floatformat:'2' }}</span>
-                                                </td>
-                                                <td><a href="{% url "cart:cart-remove" pi.id %}">x</a></td>
-                                            </tr>
-                                        {% endwith %}
-                                        {% endfor %}
-                                    <tr class="all-price">
-                                        <td colspan="4" class="title">Общая стоимость</td>
-                                        <td class="price"><i class="fa fa-rub" aria-hidden="true"></i>
-                                            <span class='jsTotalCartPrice'>{{ cart.get_total_price|floatformat:'2' }}</span>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                                <br>
-                                    <div class='row'>
-                                        <a href="{% url 'home:home' %}" class='checkout-button button alt wc-forward btn-black pull-left'>Продолжить покупки</a>
-                                        <a href="{% url 'order:order-create' %}" class="checkout-button button alt wc-forward btn-color pull-right" type="submit">Оформить заказ</a>
-                                    </div>
-                            </form>
-                        {% endif %}
+            <h1>Корзина</h1>
+            <div class="basket-title">
+                {% if not cart|length %}<p class='text-center'>Ваша корзина пуста :( </p>{% endif %}
+            </div>
+            {% if cart|length %}
+                <form action="" method="post" id="editCartForm">{% csrf_token %}
+                    <table class="table table-responsive table-hover">
+                        <thead><tr>
+                            <th>#</th>
+                            <th>Товар</th>
+                            <th>Кол-во</th>
+                            <th>Цена</th>
+                            <th>Сумма</th>
+                        <th>x</th></tr>
+                        </thead>
+                        <tbody>
+                            {% for item in cart %}
+                            {% with pi=item.product %}
+                                <tr class="spaceUnder">
+                                    <td>{{ forloop.counter }}</td>
+                                    <td class="col-md-6">
+                                        {% include 'cart/templates/image_product_item.html' %}
+                                    </td>
+                                    <td class="col-md-2">
+                                        <input class="form-control" id="quantity_id_{{ pi.id }}" min="0" name="quantity" type="number" value="{{ item.quantity }}" required>
+                                    </td>
+                                    <td data-label="Цена"><i class="fa fa-rub" aria-hidden="true"></i>
+                                        {% if pi.price_discount > 0 %}{{ pi.price_discount|floatformat:'2' }}{% else %}{{ pi.price|floatformat:'2' }}{% endif %}
+                                    </td>
+                                    <td data-label="Сумма"><i class="fa fa-rub" aria-hidden="true"></i>
+                                        <span id="totalProductPrice{{ pi.id }}" class='jsTotalProductPrice'>{{ item.total_price|floatformat:'2' }}</span>
+                                    </td>
+                                    <td><a href="{% url "cart:cart-remove" pi.id %}">x</a></td>
+                                </tr>
+                            {% endwith %}
+                            {% endfor %}
+                        <tr>
+                            <td colspan="4" class="title">Общая стоимость</td>
+                            <td class="price"><i class="fa fa-rub" aria-hidden="true"></i>
+                                <span class='jsTotalCartPrice'>{{ cart.get_total_price|floatformat:'2' }}</span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </form>
+
+                <div class='row'>
+                    <div class="col-md-12">
+                        <a href="{% url 'home:home' %}" class='btn btn-default pull-left'><i class="fa fa-chevron-left"></i>
+                            Продолжить покупки</a>
+                        <a href="{% url 'order:order-create' %}" class="btn btn-primary pull-right" type="submit">Оформить заказ
+                            <i class="fa fa-chevron-right"></i>
+                        </a>
                     </div>
                 </div>
-            </div>
+            {% endif %}
         </div>
     </div>
-
 {% endblock %}
 
 
