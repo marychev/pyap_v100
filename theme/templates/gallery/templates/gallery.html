@@ -9,8 +9,7 @@
 
 {% block additional_css %}{% endblock %}
 
-{% comment %}
-----------------------------------------------------------------------------------------------
+
 {% block breadcrumbs %}
     {% include 'default/breadcrumbs.html' with tree=object.get_ancestors obj=object %}
 {% endblock %}
@@ -18,43 +17,26 @@
 {% block leftbar %}
     {% include 'default/leftbar.html' %}
 {% endblock %}
-----------------------------------------------------------------------------------------------
-{% endcomment %}
 
 {% block main %}
 
-    <div id="page-header" {% if object.get_main_image %}style="background-image: url({% version object.get_main_image.image 'max' %});"{% endif %}>
-        <div class="center"><h1>{{ object.title }}</h1></div>
-	</div>
-
-    <div id="layout" class="wide">
-        <div id="container">
-            <div id="content" class="center">
-
-                {% if object.html %}
-                     <div class="section-title">
-                        <p class="subtitle">***</p>
-                        <h3 class="pr-font">{{ object.seo_title }}</h3>
-                    </div>
-                    <div>{{ object.html|safe }}</div>
-                {% endif %}
-
-                {% include 'catalog/templates/catalog_child_list.html' %}
-
-                <ul class='categories-nav pull_right'><small class="title">Показывать по:</small>
-                    <li class='{% if request.GET.per_page in '12' %}active{% endif %}'><a href="?per_page=12">12</a></li>
-                    <li class='{% if request.GET.per_page in '18' %} active{% endif %}'><a href="?per_page=18">18</a></li>
-                    <li class='{% if request.GET.per_page in '24' %} active{% endif %}'><a href="?per_page=24">24</a></li>
-                </ul>
-
-                {% include 'gallery/templates/gallery_photo_list.html' %}
-
-            </div>
+    <div class="col-md-9">
+        <div class="box row">
+            <h1>{{ object.title }}</h1>
+            {% if object.get_main_image %}
+                <img class="img-responsive" src="{% version object.get_main_image.image 'max' %}" title="{{ object.get_main_image.image_title }}" alt="{{ object.get_main_image.image_title }}">
+            {% endif %}
         </div>
+        {% if object.html %}
+            <div class="box">
+                <div class="content">{{ object.html|safe }}</div>
+            </div>
+        {% endif %}
+        {% include 'catalog/templates/catalog_child_list.html' %}
+        {% include 'catalog/templates/catalog_sort_row.html' with type='gallery' %}
+        {% include 'gallery/templates/gallery_photo_list.html' %}
+
     </div>
-
-
-
 
 {% endblock %}
 

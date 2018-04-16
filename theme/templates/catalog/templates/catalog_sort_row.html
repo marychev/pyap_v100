@@ -16,6 +16,7 @@
                             <a href="?per_page=96" class="btn btn-default btn-sm {% if request.GET.per_page in '96' %}btn-primary{% endif %}">96</a>
                         </div>
                     </div>
+                    {% if 'gallery' != type %}
                     <div class="col-md-6 col-sm-6">
                         <div class="products-sort-by">
                             <strong>Сортировка:</strong>
@@ -23,6 +24,7 @@
                             <a {% if request.GET.is_new %} class="active"{% endif %}><a href="?is_new=-is_new">Новинки</a>
                         </div>
                     </div>
+                    {% endif %}
                 </form>
             </div>
         </div>
