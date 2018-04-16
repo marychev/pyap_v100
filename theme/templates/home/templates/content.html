@@ -1,8 +1,9 @@
 {% load static %}
 {% load fb_versions %}
 
-{% if home %}
     <div class="container" data-animate="fadeInUpBig">
+    {% if home %}
+
         <div class="col-md-12">
             <div class="box slideshow">
                 <h2>{{ home.title }}</h2>
@@ -18,5 +19,18 @@
                 </div>
             </div>
         </div>
+    {% else %}
+    <div class="alert lead">
+        <h1>Войдите в <a target="_blank" href="/admin">Административую панель [pYAp]!</a><br>
+            <small>под своим логином и паролем</small>
+        </h1>
+        <p>В Админке нужно создать объекты, которые необходимы для проекта.</p>
+        <ol>
+            <li>Настройки Главной страницы</li>
+            <li>Добавление товаров и каталогов</li>
+            <li>Создание Галереи</li>
+            <li>Ведение Блогов</li>
+        </ol>
     </div>
-{% endif %}
+    {% endif %}
+    </div>

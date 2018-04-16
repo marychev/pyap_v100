@@ -15,7 +15,7 @@ class HomePageView(MainPageMixin, TemplateView):
         context['bestseller_products'] = ProductHelper.get_bestseller()
         context['seo'] = get_settings_template()
 
-        if context['home'].blog:
+        if 'home'in context and context['home'].blog:
             context['posts'] = context['home'].blog.post_set.filter(is_show=True)
 
         return context
