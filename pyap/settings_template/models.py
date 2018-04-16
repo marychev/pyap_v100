@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.sites.models import Site
 from filebrowser.fields import FileBrowseField
+from ckeditor_uploader.fields import RichTextUploadingField
 from catalog.models import Catalog
 from page.models import Page
 from home.models import Home
@@ -51,6 +52,7 @@ class SettingsTemplate(models.Model):
     home = models.ForeignKey(Home, verbose_name='Главная страница', blank=True, null=True)
     footer = models.ForeignKey(Footer, verbose_name='футер', blank=True, null=True)
     is_included = models.BooleanField(default=False, verbose_name='Включена', help_text=SWTTINGSTEMPLATE_IS_INCLUDED_HT)
+    email = models.EmailField(verbose_name='Email проекта', blank=True)
     phone = models.CharField(
         max_length=30, blank=True, null=True, verbose_name='Номер телефона',
         help_text=SWTTINGSTEMPLATE_PHONE_HT, unique=True)
@@ -61,7 +63,7 @@ class SettingsTemplate(models.Model):
     robots_txt = models.TextField(
         null=True, blank=True, verbose_name="Содержимое robots.txt",
         default=ROBOTS_TXT_HT, help_text=ROBOTS_TXT_HT)
-    terms_of_use = models.TextField(null=True, blank=True, verbose_name="Пользовотельское соглашение")
+    terms_of_use = RichTextUploadingField(null=True, blank=True, verbose_name="Пользовотельское соглашение")
     scripts = models.TextField(
         null=True, blank=True, verbose_name="Блок скриптов", help_text=SWTTINGSTEMPLATE_SCRIPTS_HT)
 

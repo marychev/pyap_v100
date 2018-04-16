@@ -61,10 +61,10 @@ class SettingsTemplateAdmin(DefaultSettings):
     fields = (
         'site',
         ('title', 'is_included'),
-        'logo', 'phone', 'address',
+        'logo', 'email', 'phone', 'address',
         'home', 'footer', 'terms_of_use',
         'robots_txt', 'scripts')
-    list_display = ('title', 'logo', 'phone', 'address', 'is_included')
+    list_display = ('title', 'logo', 'email', 'phone', 'address', 'is_included')
     list_display_links = ('title', 'address')
-    list_editable = ('logo', 'phone', 'is_included')
+    list_editable = ('phone', 'is_included')
     list_filter = ('is_included', 'home', 'footer')

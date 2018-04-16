@@ -13,6 +13,9 @@ select, textarea, .form-row input, td input {
     font-weight: 300;
     letter-spacing: .5px;
     font-size: 13.5px;
+    border-top: 0!important;
+    border-right: 0!important;;
+    border-left: 0!important;;
 }
 #content #content-main .module,
 input[type=text], input[type=password], input[type=email], input[type=url], input[type=number],
@@ -54,4 +57,17 @@ textarea, select, .vTextField, .button, input[type=submit], input[type=button], 
 #secondary-nav ul li.active a {
     color: #2f77ff;
     text-decoration: underline;
+}
+
+
+#changelist-filter li.selected {
+    margin-left: 0;
+}
+
+#changelist-filter li.selected a {
+    color: #46e3f8!important;
+}
+#changelist-filter li{
+    list-style-type: square;
+    color: #b6d0ff;
 }

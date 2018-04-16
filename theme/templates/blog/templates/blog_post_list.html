@@ -8,7 +8,7 @@
 <div class="row">
     <div class="col-md-12" data-animate="fadeInUp">
         <div id="blog-homepage" class="row">
-            {% for post in obj.post_set.all %}
+            {% for post in objects %}
                 <div class="col-sm-6">
                     <div class="post">
                         <div>
@@ -21,7 +21,7 @@
                             <p><time class="small text-muted" datetime="{{ post.created }}">{{ post.created }}</time></p>
                         </div>
                     </div>
-                </div>
+                </div>{% empty %}<p class="lead"> : ( Не найдено.</p>
             {% endfor %}
         </div>
         <!-- /#blog-homepage -->

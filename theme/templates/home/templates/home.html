@@ -24,12 +24,12 @@
 
     {% if setting_template.phone %}
         <section class="text-center row" style="background-image:url({% version home.get_main_image.image 'max' %});">
-            <h2>Звоните: <a href="tel:{{ setting_template.phone }}">{{ setting_template.phone }}</a></h2>
+            <h3>Звоните: <a href="tel:{{ setting_template.phone }}"><i class="fa fa-phone"></i> {{ setting_template.phone }}</a></h3>
         </section>
     {% endif %}
 
     {% if home.blog %}
-        {% include 'blog/templates/blog_post_list.html' with obj=home.blog %}
+        {% include 'blog/templates/blog_post_list.html' with obj=home.blog objects=posts %}
     {% endif %}
 
 

@@ -1,17 +1,17 @@
-<hr>
+<ul class="pager">
 {% if 'post' in type %}
     {% if next_prev.next %}
-        <a href="{{ next_prev.next.get_absolute_url }}">{{ next_prev.next.title|truncatechars:30 }} -></a>
+        <li class="next"><a href="{{ next_prev.next.get_absolute_url }}">{{ next_prev.next.title|truncatechars:30 }}  &rarr;</a></li>
     {% endif %}
     {% if next_prev.prev %}
-        <a href="{{ next_prev.prev.get_absolute_url }}"><- {{ next_prev.prev.title|truncatechars:30 }}</a>
+        <li class="previous"><a href="{{ next_prev.prev.get_absolute_url }}">&larr; {{ next_prev.prev.title|truncatechars:30 }}</a></li>
     {% endif %}
 {% else %}
     {% if next_prev.next %}
-         <a href="{{ next_prev.next.get_absolute_url }}">{{ next_prev.next.title|truncatechars:30 }} -></a>
+        <li class="next"><a href="{{ next_prev.next.get_absolute_url }}">{{ next_prev.next.title|truncatechars:30 }} &rarr;</a></li>
     {% endif %}
     {% if next_prev.prev %}
-        <a href="{{ next_prev.prev.get_absolute_url }}"><- {{ next_prev.prev.title|truncatechars:30 }}</a>
+        <li class="previous"><a href="{{ next_prev.prev.get_absolute_url }}">&larr; {{ next_prev.prev.title|truncatechars:30 }}</a></li>
     {% endif %}
 {% endif %}
-<hr>
+</ul>

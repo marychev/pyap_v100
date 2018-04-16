@@ -42,6 +42,9 @@ class ProductDetail(MainPageMixin, TemplateView):
     @csrf_exempt
     def post(self, request, *args, **kwargs):
         """Добавить товар в корзину на странице - карточка товара - Ajax"""
+
+        print(request.POST)
+
         obj = ProductItem.objects.get(id=request.POST['product_id'])
 
         response_data = {

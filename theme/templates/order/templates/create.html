@@ -16,6 +16,22 @@
             <h1>Оформление заказа</h1>
             {% include 'order/templates/cart_products_info.html' %}
             <p><span>Итоговая сумма: </span><b>{{ cart.get_total_price|floatformat:'2' }}</b></p>
+            <div class="content">
+
+                {% if setting_template.terms_of_use %}
+                    <div class="help-block"><br>
+                    <!-- Large modal -->
+                    <button type="button" class="btn btn-default btn-block" data-toggle="modal" data-target=".bs-example-modal-lg">Пользовательское соглашение</button>
+                    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                      <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                          <div class="modal-body">{{ setting_template.terms_of_use|safe }}</div>
+                        </div>
+                      </div>
+                    </div>
+                    </div><br>
+                {% endif %}
+            </div>
             <fieldset>
                 <legend>Заполните данные, чтобы оформить заказ</legend>
                 <form method="POST">

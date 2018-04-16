@@ -19,10 +19,11 @@
 
 {% block main %}
 
-    <div class="col-md-9" {% if object.get_main_image %}style="background-image: url({% version object.get_main_image.image 'max' %}); background-size: cover;"{% endif %}>
+    <div class="col-md-9">
 
-        <div class="box">
+        <div class="box row">
             <h1>{{ object.title }}</h1>
+            {% if object.get_main_image %}<img src="{% version object.get_main_image.image 'small' %}" class="col-md-2">{% endif %}
             {% if object.description %}<p>{{ object.description }}</p>{% endif %}
         </div>
 

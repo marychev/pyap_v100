@@ -7,6 +7,9 @@
 // обработка событий
 // сменить выбранную позицию товара
 $('input[name=product_item]').on('change', function () {
+
+    console.log(123)
+
     $('#productId').val($(this).val());
 });
 
@@ -36,7 +39,6 @@ $('body').on('click', '.jsAddToCart', function(event){
         };
         url = location.pathname;
     }
-    console.log(url);
 
     addCart(data, url);
 });

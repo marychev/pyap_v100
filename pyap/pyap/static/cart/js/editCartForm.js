@@ -1,15 +1,18 @@
+'use strict';
+
 /****************************************************
  *      Обработка действий на странице "КОРЗИНА"    *
  * **************************************************/
 
+
 $('input[name=quantity]').on('change', function(event){
     event.preventDefault();
-
     var productId = Number(event.target.id.replace('quantity_id_', ''))
         ,qty = Number(event.target.value)
         ,data = {"product_id" : productId, "quantity" : qty};
-
-    editCart(data);
+    if (productId)
+        editCart(data);
+    else console.warn('[!] Не передан ID товара.')
 });
 
 function editCart(data) {
@@ -19,7 +22,6 @@ function editCart(data) {
         data : data,
 
         success : function(json) {
-            console.log(111, json['total_price_product'].toFixed(2));
             $('.jsTotalCartQty').text(getTotalCartQty());
             $('#totalProductPrice'+json.product_id).text(json['total_price_product'].toFixed(2));
             $('.jsTotalCartPrice').text(getTotalCartPrice().toFixed(2));

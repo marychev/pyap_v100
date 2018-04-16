@@ -4,6 +4,7 @@ from generic.mixins import MainPageMixin
 from utils.pagination import get_pagination
 from utils.leftbar import get_leftbar
 from utils.next_prev_obj import get_next_prev
+from utils.sort import sort_by_params
 from .forms import CommentForm
 from .models import Comment, Post, Blog
 from django.contrib import messages
@@ -44,6 +45,7 @@ class BlogListView(MainPageMixin, TemplateView):
         ).first()
 
         context['objects'] = Post.objects.filter(blog_id=context['object'].id, is_show=True).order_by('-id')
+        context['objects'] = sort_by_params(self.request, context['objects'])
         context['objects'] = get_pagination(self.request, context['objects'])
         return context
 

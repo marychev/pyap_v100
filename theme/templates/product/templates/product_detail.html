@@ -15,7 +15,7 @@
 {% endblock %}
 
 {% block leftbar %}
-    {% include 'default/leftbar.html' %}
+    {% include 'default/leftbar.html' with object=product %}
 {% endblock %}
 
 
@@ -79,6 +79,8 @@
             <div class="content">{{ product.html|safe }}</div>
         {% endif %}
     </div>
+
+    {% include 'default/next_prev.html' with next_prev=next_prev %}
 
     <div class='box'>
         {% include 'default/comment_list.html' %}<br>

@@ -13,22 +13,27 @@
                             <a href="tel:{{ setting_template.phone }}"><i class="fa fa-phone"></i> {{ setting_template.phone }}</a>
                         </li>
                     {% endif %}
+                    {% if setting_template.email %}
+                        <li>
+                            <a href="email:{{ setting_template.email }}"><i class="fa fa-envelope"></i> {{ setting_template.email }}</a>
+                        </li>
+                    {% endif %}
                 </ul>
                 <ul class="menu text-right">
                     <li>
                         {% if user.is_authenticated %}
-                            <a href="{% url 'users:profile' %}">Аккаунт</a>
+                            <a href="{% url 'users:profile' %}"><i class="fa fa-user"></i> Аккаунт</a>
                         {% else %}
 {#                            <a href="#" data-toggle="modal" data-target="#login-modal">Login</a>#}
-                            <a href="{% url 'users:login' %}">Войти</a>
+                            <a href="{% url 'users:login' %}"><i class="fa fa-user"></i> Войти</a>
                         {% endif %}
                     </li>
 
                     <li>
                         {% if user.is_authenticated %}
-                            <a href="{% url 'users:logout' %}">Выход</a>
+                            <a href="{% url 'users:logout' %}"><i class="fa fa-reply"></i> Выход</a>
                         {% else %}
-                            <a href="{% url 'users:register' %}">Регистрация</a>
+                            <a href="{% url 'users:register' %}"><i class="fa fa-pencil"></i> Регистрация</a>
                        {% endif %}
                     </li>
                 </ul>

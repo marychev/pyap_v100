@@ -4,11 +4,11 @@
 {% if objects %}
 
 <div id="hot">
-    <div class="container">
-        <div class="box">
-            <h2>{% if title %}{{ title }}{% endif %}{{ object.title }}</h2>
-        </div>
-        <div class="product-slider">
+
+    <div class="box">
+        <h2 class="">{% if title %}{{ title }}{% endif %}{{ object.title }}</h2>
+    </div>
+    <div class="product-slider">
             {% with objects=objects %}
                 {% for product in objects %}
                     <div class="item">
@@ -69,7 +69,7 @@
                 {% endfor %}
             {% endwith %}
         </div>
-    </div>
+
 </div>
 {% endif %}
 

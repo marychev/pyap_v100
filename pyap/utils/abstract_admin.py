@@ -149,7 +149,7 @@ class ABSContentSeoAdmin(ImageAdmin, SEOAdmin):
     abs_raw_id_fields = ('author',)
     abs_readonly_fields = ('get_image_thumb', 'created', 'updated')
     abs_search_fields = ('title',)
-    abs_list_filter = ('is_show', 'is_allow_comments',)
+    abs_list_filter = ('is_show', 'is_allow_comments', 'tags')
     abs_list_display = ('title', 'get_image_thumb', 'author', 'sort', 'is_show', 'is_allow_comments',)
     abs_list_display_links = ('title', 'get_image_thumb', 'author')
     abs_list_editable = ('sort', 'is_show', 'is_allow_comments')
@@ -181,7 +181,7 @@ class ABSMPTTContentSeoAdmin(MPTTModelAdmin, ImageAdmin, SEOAdmin):
     abs_readonly_fields = ('get_image_thumb', 'created', 'updated')
     abs_search_fields = ('title', 'parent__title')
     abs_list_filter = (
-        'is_show', ('parent', TreeRelatedFieldListFilter)
+        'is_show', ('parent', TreeRelatedFieldListFilter), 'tags',
     )
     abs_list_display = ('title', 'get_image_thumb', 'parent', 'author', 'sort', 'is_show')
     abs_list_display_links = ('title', 'get_image_thumb', 'author')

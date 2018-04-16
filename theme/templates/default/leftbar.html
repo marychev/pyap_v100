@@ -3,7 +3,6 @@
     <div class="col-md-3">
         <div class="panel panel-default sidebar-menu">
             <div class="panel-heading"><h3 class="panel-title"> {{ leftbar.root_obj.title }}</h3></div>
-
             <div class="panel-body">
                 <ul class="nav nav-pills nav-stacked category-menu">
                     {% if leftbar.obj_list %}
@@ -18,10 +17,17 @@
                         {% endrecursetree %}
                     {% endif %}
                 </ul>
+            </div>
 
+            <div class="panel-heading"><h3 class="panel-title">Тэги</h3></div>
+            <p class="panel-body">
+            {% if object.tags.exists %}
+                {% for tag in object.tags.iterator %}
+                    <a href="?tag={{ tag.id }}" class="{% if request.GET.tag == tag.id|lower %} btn-primary{% endif %} tag btn btn-sm btn-default">{{ tag }}</a>
+                {% endfor %}
+            {% endif %}
             </div>
         </div>
-    </div>
 
 {#            <div class="panel panel-default sidebar-menu">#}
 {##}

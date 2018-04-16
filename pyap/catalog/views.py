@@ -4,29 +4,11 @@ from django.views.decorators.csrf import csrf_exempt
 from generic.mixins import MainPageMixin
 from utils.pagination import get_pagination
 from utils.leftbar import get_leftbar
+from utils.sort import sort_by_params
 from catalog.models import Catalog
 from product.models import Product, ProductItem
 from product.views import ProductDetail
 import json
-
-
-def sort_by_params(request, object_list):
-    """
-    Сортировка по GET параметрам запрса
-    """
-    # новинки
-    is_new = request.GET.get('is_new', '')
-    if is_new:
-        object_list = object_list.order_by(is_new)
-
-    # по цене
-    price = request.GET.get('price', '')
-    if price:
-        reverse = True if request.GET.get('price')[:1] == '-' else False
-        object_list = list(object_list)
-        object_list.sort(key=lambda o: o.get_price(), reverse=reverse)
-
-    return object_list
 
 
 class CatalogView(MainPageMixin, TemplateView):

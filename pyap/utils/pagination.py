@@ -1,7 +1,7 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
-PER_PAGE = 2
+PER_PAGE = 12
 
 
 def get_pagination(request, object_list):
