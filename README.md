@@ -1,6 +1,6 @@
 # PyAp - движок, с открытым исходным кодом для быстрой разработки веб-приложений, корпоративных сайтов.
 
-Технологии как Python 3.x, Django<=1.11, Postgres*. 
+Технологии: Python 3.x, Django<=1.11, Postgres*. 
 Разработчикам - движок сократит много недель. 
 Административная панель на русском. 
 *Pyap* легко расширять, изменять бизнес логику. 
@@ -10,19 +10,19 @@
  
 --------------------------------------------------
 ### Быстрая установка и клонирование движка.
-````````
-git clone git@bitbucket.org:marychev/pyap_v1.0.0.git
-cd pyap_v1.0.0
-virtualenv --python=python3 venv
-source venv/bin/activate
 
-cd pyap
-pip install -r requirements.txt
+    git clone git@bitbucket.org:marychev/pyap_v1.0.0.git
+    cd pyap_v1.0.0
+    virtualenv --python=python3 venv
+    source venv/bin/activate
+    
+    cd pyap
+    pip install -r requirements.txt
+    
+    python manage.py collectstatic --noinput
+    python manage.py migrate
+    python manage.py runserver 
 
-python manage.py collectstatic --noinput
-python manage.py migrate
-python manage.py runserver 
-`````````
 [Смотрим](http://localhos:8000). 
 -------------------------------------------------
 
