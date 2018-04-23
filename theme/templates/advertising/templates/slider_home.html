@@ -10,7 +10,7 @@
             {% with slider=slider_home  %}
                 {% for sh in slider %}
                 <div class="item">
-                    <img src="{% version sh.image 'max' %}" alt="{{ sh.title }}" title="{{ sh.title }}" class="img-responsive">
+                    {% if sh.image %}<img src="{% version sh.image 'max' %}" alt="{{ sh.title }}" title="{{ sh.title }}" class="img-responsive">{% endif %}
                     <div class="info">
                         <h3 class='title'>
                             {% if sh.url %}

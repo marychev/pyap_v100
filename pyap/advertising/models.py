@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.html import format_html
 from filebrowser.fields import FileBrowseField
 from utils.help_text import URL_HT, SORT_HT
 
@@ -12,16 +13,17 @@ class SliderHome(models.Model):
 
     title = models.CharField(max_length=126, verbose_name='Название', blank=True, null=True)
     description = models.TextField(max_length=1024, verbose_name='Описание', null=True, blank=True)
-    image = FileBrowseField(max_length=500, extensions=['.jpg', '.jpeg', '.png', '.gif'], verbose_name='Изображение')
+    image = FileBrowseField(
+        max_length=500, extensions=['.jpg', '.jpeg', '.png', '.gif'], blank=True, null=True,
+        verbose_name='Изображение')
     url = models.URLField('Полный путь к веб-странице', null=True, blank=True, help_text=URL_HT)
     sort = models.PositiveSmallIntegerField('Сортировка', null=True, blank=True, help_text=SORT_HT, default=1000)
 
     def __str__(self):
         return self.title
 
-    def get_description(self):
-        return self.description
-
+    def get_html_description(self):
+        return format_html(self.description)
 
 # [!] NOT DELETE ---
 # -------------------

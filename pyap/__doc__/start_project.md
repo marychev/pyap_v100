@@ -1,3 +1,14 @@
+    clone git@bitbucket.org:marychev/pyap_v1.0.0.git
+    cd pyap_v1.0.0
+    virtualenv --python=python3 venv
+	source venv/bin/activate
+	cd ~/projects/pyap_v1.0.0/pyap/
+	pip install -r requirements.txt
+	python manage.py collectstatic --noinput
+	python manage.py makemigrations
+	python manage.py migrate
+	python manage.py runserver
+	
 #  Развертывание проекта 
 
 `pyap_v1.0.0` - название проекта используется как пример

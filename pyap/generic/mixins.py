@@ -37,7 +37,7 @@ class HomeMixin(MainMenuMixin):
         context = super(HomeMixin, self).get_context_data(**kwargs)
         context['setting_template'] = get_settings_template()
         try:
-            if context['setting_template']:
+            if context['setting_template'] and context['setting_template'].home:
                 context['home'] = Home.objects.get(id=context['setting_template'].home.id, is_show=True)
         except Home.DoesNotExist:
             context['home'] = []

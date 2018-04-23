@@ -47,7 +47,7 @@ OG_LOCALE_HT = """
 """
 
 
-ROBOTS_TXT_HT = 'User-agent: Yandex\r\nDisallow: /admin'
+ROBOTS_TXT_HT = 'User-agent: Yandex\r\nDisallow: /admin\r\nDisallow: /dev_init'
 
 
 SETTINGSTEMPLATE_TYPE_LINK_HT = """
