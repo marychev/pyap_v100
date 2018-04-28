@@ -106,7 +106,7 @@ class Post(ABSContentModel):
 
     def get_absolute_url(self):
         kwargs = {
-            'blog_slug': self.blog.get_root().slug,
+            'blog_slug': self.blog.slug,
             'post_slug': self.slug,
         }
         return reverse('blog_detail', kwargs=kwargs)

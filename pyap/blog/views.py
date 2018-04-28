@@ -43,8 +43,8 @@ class BlogListView(MainPageMixin, TemplateView):
         context['current_mainmenu'] = context['mainmenu'].filter(
             blog_id=blog_id, is_show=True,
         ).first()
-
-        context['objects'] = Post.objects.filter(blog_id=context['object'].id, is_show=True).order_by('-id')
+        print(1)
+        context['objects'] = Post.objects.filter(blog_id=context['object'].id, is_show=True)
         context['objects'] = sort_by_params(self.request, context['objects'])
         context['objects'] = get_pagination(self.request, context['objects'])
         return context

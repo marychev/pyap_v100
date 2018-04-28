@@ -32,8 +32,6 @@
          {% endfor %}
         {% if objects %}
             <h5 class="pr-font">ВСЕ СТАТЬИ:</h5>{% include 'default/pagination.html' %}
-        {% else %}
-            <p><i>: (</i> Записи еще не опубликованны...</p>
         {% endif %}
 {#        {% include 'catalog/templates/catalog_child_list.html' %}#}
         {% include 'blog/templates/blog_post_list.html' with obj=object %}
