@@ -101,15 +101,15 @@ CART_SESSION_ID = 'cart'
 
 # django menu style
 ADMIN_STYLE = {
-    'primary-color': '#6ca0ff',
-    'secondary-color': '#7aa9ff',
-    'tertiary-color': '#95baff',
+    'primary-color': '#1f2735',
+    'secondary-color': '#344256',
+    'tertiary-color': '#3a4860',
     # 'background': 'white',
     'primary-text': '#fff',
     # 'secondary-text': 'white',
     'tertiary-text': '#fff',
     'breadcrumb-color': '#b6d0ff',
-    'breadcrumb-text': '#2a6be4',
+    'breadcrumb-text': '#34d5ff',
     'focus-color': '#e4edff',
     # 'focus-text': '#45ffe8 ',
     'primary-button': '#23d5ff',
