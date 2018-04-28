@@ -11,7 +11,7 @@
 --------------------------------------------------
 ### Быстрая установка и клонирование движка.
 
-    git clone git@bitbucket.org:marychev/pyap_v1.0.0.git
+    git@github.com:marychev/pyap_v100.git
     cd pyap_v1.0.0
     virtualenv --python=python3 venv
     source venv/bin/activate
