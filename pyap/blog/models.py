@@ -67,6 +67,10 @@ class BlogImage(ABSImageModel):
     def __str__(self):
         return self.blog.title
 
+    def save(self, *args, **kwargs):
+        self.set_image_title(obj=self.blog)
+        super(BlogImage, self).save(*args, **kwargs)
+
     class Meta:
         verbose_name = 'Фотографию'
         verbose_name_plural = 'Фотографии'
