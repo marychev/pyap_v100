@@ -5,15 +5,17 @@ from django.conf.urls.static import static
 from filebrowser.sites import site as filebrowser_site
 from django.contrib.auth import views as auth_views
 from django.contrib.sitemaps.views import sitemap
-from sitemap.init import sitemaps
+from seo.init import sitemaps
+from seo.views import robots_txt
 
 
 urlpatterns = [
     url(r'^admin/filebrowser/', include(filebrowser_site.urls)),
-    # url(r'^grappelli/', include('grappelli.urls')),
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', admin.site.urls),
     url('^', include('django.contrib.auth.urls')),
+    url(r'^admin/password_reset/$', auth_views.password_reset, name='admin_password_reset'),
+    url(r'^admin/password_reset/done/$', auth_views.password_reset_done, name='password_reset_done'),
 
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
 
@@ -29,8 +31,9 @@ urlpatterns = [
     # modules
     url(r'^search/', include('search.urls', namespace='search')),
     url(r'^cart/', include('cart.urls', namespace='cart')),
-    url(r'^sitemap\.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
 
+    url(r'^sitemap\.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
+    url(r'^robots\.txt', robots_txt, name='robots_txt'),
     # ---- Приоритет имеет значение! ----
     url(r'^catalog/', include('catalog.urls', namespace='catalog')),
     url(r'^', include('product.urls', namespace='product')),

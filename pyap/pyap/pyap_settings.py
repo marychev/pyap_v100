@@ -132,6 +132,6 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 ADMIN_EMAIL = EMAIL_HOST_USER
-# --- DURUNG DEVELOPMENT ONLY ---
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-# ------------------------------------------------------------------
+# # --- DURUNG DEVELOPMENT ONLY ---
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# # ------------------------------------------------------------------
