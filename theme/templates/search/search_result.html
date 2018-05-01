@@ -9,7 +9,6 @@
 {% block keywords %}{{ title }}{% endblock %}
 
 {% block additional_css %}
-    <link rel="stylesheet" href="{% static 'catalog/catalog.css' %}" type="text/css" media="all">
     <link rel="stylesheet" href="{% static 'cart/css/cart.css' %}" type="text/css" media="all">
 {% endblock %}
 
@@ -17,16 +16,32 @@
 {% block breadcrumbs %}{% include 'default/breadcrumbs.html' with obj=title %}{% endblock %}
 
 {% block main %}
-    {% if objects %}
-        {% include 'catalog/templates/catalog_product_list.html' %}
-    {% else %}
+
+    {% for model_obj in objects %}
+        {% for obj in model_obj %}
+            <div class="box">
+                <h3 class="h4"><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a></h3>
+                {% if obj.get_main_image.image %}
+                    <img class="img-rounded" src="{% version obj.get_main_image.image 'small' %}" alt="">
+                {% endif %}
+                {% if obj.description %}<p class='info'>{{ obj.description }}</p>{% endif %}
+                {% if obj.get_price %}<p>{{ obj.get_price|floatformat:2 }}</small>{% endif %}
+                <a class="btn btn-primary" href="{{ obj.get_absolute_url }}">Подробнее</a>
+            </div>
+        {% endfor %}
+        {% empty %}
         <hr>
         <div class="container">
             <h3> По вашему запросу ничего не найдено :(</h3>
         </div>
-        <br><br><br><br><br>
-    {% endif %}
-{% endblock %}
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+    {% endfor %}
+    {% comment %} {% include 'catalog/templates/catalog_product_list.html' %} {% endcomment %}
+    {% endblock %}
 
 
 

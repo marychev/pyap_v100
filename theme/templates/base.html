@@ -45,6 +45,8 @@
     <meta name="author" content="Marychev Mihail | pyap.ru">
     <meta name="description" content="{% block description %}{% endblock %}">
     <meta name="keywords" content="{% block keywords %}{% endblock %}">
+    {% if setting_template.meta %}{{ setting_template.meta|safe }}{% endif %}
+
     {% block additional_css %}{% endblock %}
     {# -- end -- #}
 </head>
