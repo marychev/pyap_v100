@@ -63,7 +63,7 @@ class SettingsTemplateAdmin(DefaultSettings):
         ('title', 'is_included'),
         'logo', 'email', 'phone', 'address',
         'home', 'footer', 'terms_of_use',
-        'robots_txt', 'scripts')
+        'robots_txt', 'meta',  'scripts')
     list_display = ('title', 'logo', 'email', 'phone', 'address', 'is_included')
     list_display_links = ('title', 'address')
     list_editable = ('phone', 'is_included')

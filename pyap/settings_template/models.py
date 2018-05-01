@@ -9,7 +9,7 @@ from blog.models import Blog
 from gallery.models import Gallery
 from site_info.models import ListLink, TextInfo
 from utils.help_text import ROBOTS_TXT_HT, SWTTINGSTEMPLATE_TITLE_HT, SWTTINGSTEMPLATE_PHONE_HT, \
-    SWTTINGSTEMPLATE_IS_INCLUDED_HT, SWTTINGSTEMPLATE_LOGO_HT, SWTTINGSTEMPLATE_SCRIPTS_HT
+    SWTTINGSTEMPLATE_IS_INCLUDED_HT, SWTTINGSTEMPLATE_LOGO_HT, SWTTINGSTEMPLATE_SCRIPTS_HT, SWTTINGSTEMPLATE_META_HT
 
 
 class Footer(models.Model):
@@ -64,6 +64,8 @@ class SettingsTemplate(models.Model):
         null=True, blank=True, verbose_name="Содержимое robots.txt",
         default=ROBOTS_TXT_HT, help_text=ROBOTS_TXT_HT)
     terms_of_use = RichTextUploadingField(null=True, blank=True, verbose_name="Пользовотельское соглашение")
+    meta = models.TextField(
+        null=True, blank=True, verbose_name="Блок Мета-тегов", help_text=SWTTINGSTEMPLATE_META_HT)
     scripts = models.TextField(
         null=True, blank=True, verbose_name="Блок скриптов", help_text=SWTTINGSTEMPLATE_SCRIPTS_HT)
 
