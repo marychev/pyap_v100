@@ -47,8 +47,19 @@ OG_LOCALE_HT = """
 """
 
 
-ROBOTS_TXT_HT = 'User-agent: Yandex\r\nDisallow: /admin\r\nDisallow: /dev_init'
+ROBOTS_TXT_HT = """
+User-agent: Yandex\r\n
+Disallow: /admin\r\n
+Disallow: /dev__init\r\n
+Sitemap: http://dervek.ru/sitemap.xml\r\n
+Host: dervek.ru\r\n
 
+User-agent: *\r\n
+Disallow: /admin\r\n
+Disallow: /dev__init\r\n
+Sitemap: http://dervek.ru/sitemap.xml\r\n
+Host: dervek.ru\r\n
+"""
 
 SETTINGSTEMPLATE_TYPE_LINK_HT = """
 Создает CSS классы, в зависимости от выбраного типа. ``L_link``-ссылка или ``T_link``-тэг.<br>
@@ -72,6 +83,13 @@ SWTTINGSTEMPLATE_SCRIPTS_HT = """
 < script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script><br>
 < script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script><br>
 < script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+"""
+
+SWTTINGSTEMPLATE_META_HT = """
+Пример: "Подключение meta-тэга для 'Подтверждение прав на САЙТА' в Яндекс-Вебмастер"<br>
+--------------------------------------------------------<br> 
+< meta name="yandex-verification" content="831t65hfbfafdzyx" /><br>
+Дальше можно также дописывать дугие мета-тэги.
 """
 
 SOCIAL_NETWORK_HTML_LINK_HT = '''

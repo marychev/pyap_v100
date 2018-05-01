@@ -1,5 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.models import User, Group
+from django.contrib.auth.admin import UserAdmin as DefaultUserAdmin
+from django.contrib.auth.forms import UserChangeForm as DefaultUserChangeForm
 from daterange_filter.filter import DateTimeRangeFilter, DateRangeFilter
 
 from utils.abstract_admin import DefaultSettings
@@ -9,7 +11,12 @@ admin.site.unregister(User)
 admin.site.unregister(Group)
 
 
-class UserProfileInline(admin.TabularInline):
+class UserChangeForm(DefaultUserChangeForm):
+    class Meta(DefaultUserChangeForm.Meta):
+        model = User
+
+
+class UserProfileInline(admin.StackedInline):
     verbose_name_plural = 'Профиль'
     model = UserProfile
 
@@ -23,12 +30,13 @@ class UserLinkInline(admin.TabularInline):
 
 
 @admin.register(User)
-class UserAdmin(DefaultSettings):
+class UserAdmin(DefaultUserAdmin, DefaultSettings):
     menu_title = "Пользователи"
     menu_group = "Пользователи"
     inlines = (UserProfileInline, UserLinkInline)
+    form = UserChangeForm
     date_hierarchy = 'date_joined'
-    readonly_fields = ('date_joined', 'last_login')
+    readonly_fields = ('date_joined', 'last_login', 'password')
     search_fields = ('^username', '^email', '^last_name')
     list_filter = (
         ('date_joined', DateRangeFilter), ('last_login', DateRangeFilter),
@@ -41,7 +49,10 @@ class UserAdmin(DefaultSettings):
     filter_horizontal = ('groups', 'user_permissions')
     fieldsets = (
         ('Основные данные', {
-            'fields': ('username', 'first_name', 'last_name', 'email', ('is_active', 'is_staff', 'is_superuser'))
+            'fields': (
+                'username', 'first_name', 'last_name', 'email', 
+                ('is_active', 'is_staff', 'is_superuser')
+            )
         }),
         ('Дополнительно', {
             'fields': ('groups', 'user_permissions', 'date_joined', 'last_login'),
