@@ -1,5 +1,4 @@
 from django.contrib import admin
-from mptt.admin import DraggableMPTTAdmin, MPTTModelAdmin
 from mptt.admin import TreeRelatedFieldListFilter
 from utils.abstract_admin import DefaultSettings, ABSDefaultMPTTAdmin
 from .models import MainMenu

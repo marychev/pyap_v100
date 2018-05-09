@@ -14,8 +14,9 @@ class GalleryImageInline(ImageInlineTabularAdmin):
 
 @admin.register(Gallery)
 class GalleryAdmin(ABSDefaultMPTTAdmin, ImageAdmin, SEOAdmin):
-    menu_title = "1.Галерея"
+    menu_title = "Галерея"
     menu_group = "Галерея"
+
     actions = ABSDefaultMPTTAdmin.abs_actions + ImageAdmin.abs_actions + SEOAdmin.abs_actions
     inlines = (GalleryImageInline,)
     raw_id_fields = ('parent',)
@@ -34,7 +35,7 @@ class GalleryAdmin(ABSDefaultMPTTAdmin, ImageAdmin, SEOAdmin):
     fieldsets = (
         ('ОСНОВНЫЕ ДАННЫЕ', {
             'fields': (
-                'get_image_thumb', ('title', 'is_show'), 'parent', 'html', 'tags'
+                'get_image_thumb', ('title', 'is_show'), 'parent', 'html', 'tags', 'sort',
             ),
         }),
         ('СЕО-НАСТРОЙКИ', {
@@ -79,7 +80,7 @@ class GalleryAdmin(ABSDefaultMPTTAdmin, ImageAdmin, SEOAdmin):
 
 @admin.register(GalleryImage)
 class GalleryImageAdmin(ImageAdmin):
-    menu_title = "1.Галерея: Фото"
+    menu_title = "Галерея:Фото"
     menu_group = "Галерея"
     raw_id_fields = ('gallery',)
     search_fields = ('image_title', 'gallery__title')

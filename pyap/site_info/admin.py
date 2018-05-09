@@ -41,8 +41,9 @@ if SHOW_IN_DASHBOARD:
 
 @admin.register(TextInfo)
 class TextInfoAdmin(DefaultSettings):
-    menu_title = '4.Текстовая информация'
+    menu_title = 'Текстовая информация'
     menu_group = 'Настройки'
+
     search_fields = ('title',)
     list_display = ('title', 'get_html')
     list_filter = ('title',)
@@ -50,8 +51,9 @@ class TextInfoAdmin(DefaultSettings):
 
 @admin.register(ListLink)
 class ListLinkAdmin(DefaultSettings):
-    menu_title = '5.Быстрые ссылки'
+    menu_title = 'Быстрые ссылки'
     menu_group = 'Настройки'
+
     search_fields = ('title',)
     list_display = ('title', 'url', 'is_show', 'type_link')
     list_editable = ('type_link', 'url', 'is_show')

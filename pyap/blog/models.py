@@ -3,7 +3,6 @@ from django.db import models
 from django.db.models.signals import post_save
 from utils.abstract_model import ABSContentModel, ABSImageModel, ABSCommentModel
 from mptt.models import MPTTModel, TreeForeignKey
-from users.models import User
 from site_info.models import Tag
 from .signals import save_comment
 

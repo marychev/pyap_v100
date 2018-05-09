@@ -14,7 +14,7 @@ class PageImageInline(ImageInlineTabularAdmin):
 
 @admin.register(Page)
 class PageAdmin(ABSContentSeoAdmin):
-    menu_title = '2.Страницы'
+    menu_title = 'Страницы'
     menu_group = 'Контент'
     inlines = (PageImageInline,)
     actions = ABSContentSeoAdmin.abs_actions
@@ -31,7 +31,7 @@ class PageAdmin(ABSContentSeoAdmin):
 
 @admin.register(PageImage)
 class PageImageAdmin(ImageAdmin):
-    menu_title = "2.Страницы: Фото"
+    menu_title = "Страницы:Фото"
     menu_group = "Контент"
     raw_id_fields = ('page',)
     search_fields = ('image_title', 'page__title')

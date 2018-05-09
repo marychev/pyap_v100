@@ -7,7 +7,7 @@ from .models import SliderHome
 
 @admin.register(SliderHome)
 class SliderHomeAdmin(ImageAdmin):
-    menu_title = '5.Слайдер'
+    menu_title = 'Слайдер'
     menu_group = 'Контент'
 
     formfield_overrides = {

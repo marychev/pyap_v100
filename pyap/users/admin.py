@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.admin import UserAdmin as DefaultUserAdmin
 from django.contrib.auth.forms import UserChangeForm as DefaultUserChangeForm
-from daterange_filter.filter import DateTimeRangeFilter, DateRangeFilter
+from daterange_filter.filter import DateRangeFilter
 
 from utils.abstract_admin import DefaultSettings
 from .models import UserProfile, UserLink

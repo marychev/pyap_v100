@@ -6,7 +6,7 @@
 *Pyap* легко расширять, изменять бизнес логику. 
 
 В качестве шаблона был взят бесплатный шаблон интернет магазина.
-[Спасибо Bootstrap!](https://bootstrapious.com/p/obaju-e-commerce-template). 
+[Спасибо Bootstrap! и OBAJU E-COMMERCE TEMPLATE!](https://bootstrapious.com/p/obaju-e-commerce-template). 
  
 --------------------------------------------------
 ### Быстрая установка и клонирование движка.

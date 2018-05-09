@@ -56,7 +56,7 @@ class ProductAdmin(ImageAdmin, SEOAdmin):
         ('ОСНОВНЫЕ ДАННЫЕ', {
             'fields': (
                 ('get_image_thumb', 'is_bestseller', 'is_new'),
-                SEOAdmin.abs_fieldsets, 'articul', 'catalog', 'recommend_products', 'tags',
+                SEOAdmin.abs_fieldsets, 'articul', 'catalog', 'recommend_products', 'tags', 'sort',
             ),
         }),
         ('СЕО-НАСТРОЙКИ', {
@@ -113,7 +113,7 @@ class ProductAdmin(ImageAdmin, SEOAdmin):
 
 @admin.register(ProductItem)
 class ProductItemAdmin(DefaultSettings):
-    menu_title = "..Товар:Варианты"
+    menu_title = "Товар:Варианты"
     menu_group = "Каталог"
     actions = ('clone_object',)
     raw_id_fields = ('product',)
@@ -147,7 +147,7 @@ class ProductItemAdmin(DefaultSettings):
 
 @admin.register(ProductImage)
 class ProductImageAdmin(AdminImageMixin, ImageAdmin):
-    menu_title = "..Товар:Фотографии"
+    menu_title = "Товар:Фотографии"
     menu_group = "Каталог"
     raw_id_fields = ('product',)
     search_fields = ('product__title', 'product__articul')
@@ -159,7 +159,7 @@ class ProductImageAdmin(AdminImageMixin, ImageAdmin):
 
 @admin.register(ProductComment)
 class ProductCommentAdmin(DefaultSettings):
-    menu_title = "..Товар:Комментарии"
+    menu_title = "Товар:Комментарии"
     menu_group = "Пользователи"
     raw_id_fields = ('product', 'user')
     date_hierarchy = 'created'

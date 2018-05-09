@@ -24,7 +24,7 @@ class StoryInline(admin.TabularInline):
 
 @admin.register(Status)
 class StatusAdmin(DefaultSettings):
-    menu_title = 'Заказы: Статусы заказов'
+    menu_title = 'Заказы:Статусы'
     menu_group = 'Заказы'
     search_fields = ('name',)
 
@@ -63,7 +63,7 @@ class OrderAdmin(DefaultSettings):
 
 @admin.register(Story)
 class StoryAdmin(DefaultSettings):
-    menu_title = 'Заказы: Истории заказов'
+    menu_title = 'Заказы:История'
     menu_group = 'Заказы'
     date_hierarchy = 'created'
     search_fields = ('order_id', 'status')

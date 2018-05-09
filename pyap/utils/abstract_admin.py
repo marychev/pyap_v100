@@ -121,7 +121,7 @@ class SEOAdmin(DefaultSettings):
 
     abs_actions = ['fill_seo_fields']
     abs_fields = ['slug', 'seo_title', 'seo_description', 'seo_keywords', 'og_locale', 'scripts']
-    abs_fieldsets = 'title', 'is_show', 'description', 'html', 'sort'
+    abs_fieldsets = 'title', 'is_show', 'description', 'html',
     abs_readonly_fields = ['created', 'updated']
 
     def fill_seo_fields(self, request, queryset):
@@ -157,7 +157,8 @@ class ABSContentSeoAdmin(ImageAdmin, SEOAdmin):
     abs_fieldsets = (
         ('ОСНОВНЫЕ ДАННЫЕ', {
             'fields': (
-                'get_image_thumb', ('title', 'is_show'), 'description', 'html', 'author', 'is_allow_comments', 'tags'
+                'get_image_thumb', ('title', 'is_show'), 'description', 'html', 'sort',
+                'author', 'is_allow_comments', 'tags'
             ),
         }),
         ('СЕО-НАСТРОЙКИ', {
@@ -190,7 +191,8 @@ class ABSMPTTContentSeoAdmin(MPTTModelAdmin, ImageAdmin, SEOAdmin):
     abs_fieldsets = (
         ('ОСНОВНЫЕ ДАННЫЕ', {
             'fields': (
-                'get_image_thumb', ('title', 'is_show'), 'parent', 'description', 'html', 'author', 'tags'
+                'get_image_thumb', ('title', 'is_show'), 'parent', 'description', 'html',
+                'sort', 'author', 'tags'
             ),
         }),
         ('СЕО-НАСТРОЙКИ', {

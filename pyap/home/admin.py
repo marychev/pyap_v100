@@ -13,8 +13,9 @@ class HomeImageInline(ImageInlineTabularAdmin):
 
 @admin.register(Home)
 class HomeAdmin(ImageAdmin, SEOAdmin):
-    menu_title = '1.Главная страница'
+    menu_title = 'Главная страница'
     menu_group = 'Контент'
+
     inlines = (HomeImageInline,)
     raw_id_fields = ('blog',)
     readonly_fields = ('get_image_thumb',)

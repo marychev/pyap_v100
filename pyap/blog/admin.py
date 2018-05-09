@@ -1,6 +1,6 @@
-from django.contrib import admin, messages
+from django.contrib import admin
 from daterange_filter.filter import DateRangeFilter
-from utils.abstract_admin import MPTTModelAdmin, ImageAdmin, ImageInlineTabularAdmin, SEOAdmin, DefaultSettings, \
+from utils.abstract_admin import ImageAdmin, ImageInlineTabularAdmin, DefaultSettings, \
     ABSMPTTContentSeoAdmin, ABSContentSeoAdmin
 from .models import Blog, BlogImage, Post, PostImage, Comment
 
@@ -19,7 +19,7 @@ class PostImageInline(ImageInlineTabularAdmin):
 
 @admin.register(Blog)
 class BlogAdmin(ABSMPTTContentSeoAdmin):
-    menu_title = "3.Блог"
+    menu_title = "Блог"
     menu_group = "Контент"
     inlines = (BlogImageInline,)
     action = (ABSMPTTContentSeoAdmin.abs_actions,)
@@ -36,7 +36,7 @@ class BlogAdmin(ABSMPTTContentSeoAdmin):
 
 @admin.register(BlogImage)
 class BlockImageAdmin(ImageAdmin):
-    menu_title = "3.Блог: Фото"
+    menu_title = "Блог:Фото"
     menu_group = "Контент"
     raw_id_fields = ('blog',)
     search_fields = ('image_title', 'blog__title')
@@ -51,7 +51,7 @@ class BlockImageAdmin(ImageAdmin):
 
 @admin.register(Post)
 class PostAdmin(ABSContentSeoAdmin):
-    menu_title = "3.Блог: Посты"
+    menu_title = "Блог:Посты"
     menu_group = "Контент"
     inlines = (PostImageInline,)
     action = (ABSContentSeoAdmin.abs_actions,)
@@ -68,7 +68,7 @@ class PostAdmin(ABSContentSeoAdmin):
         ('ОСНОВНЫЕ ДАННЫЕ', {
             'fields': (
                 'blog', 'get_image_thumb', ('title', 'is_show'), 'description', 'html', 'is_allow_comments',
-                'author', 'tags',
+                'author', 'tags', 'sort',
             ),
         }),
         ('СЕО-НАСТРОЙКИ', {
@@ -85,7 +85,7 @@ class PostAdmin(ABSContentSeoAdmin):
 
 @admin.register(PostImage)
 class PostImageAdmin(ImageAdmin):
-    menu_title = "3.Посты: Фото"
+    menu_title = "Посты:Фото"
     menu_group = "Контент"
     raw_id_fields = ('post',)
     search_fields = ('image_title', 'post__title')

@@ -11,7 +11,7 @@ admin.site.unregister(Site)
 
 @admin.register(Site)
 class SiteAdmin(DefaultSettings):
-    menu_title = '7.Домен'
+    menu_title = 'Домен'
     menu_group = 'Настройки'
     search_fields = ('name', 'domain')
     list_display = ('domain', 'name')
@@ -20,7 +20,7 @@ class SiteAdmin(DefaultSettings):
 
 @admin.register(Footer)
 class FooterAdmin(DefaultSettings):
-    menu_title = '2.Футер'
+    menu_title = 'Футер'
     menu_group = 'Настройки'
     radio_fields = {'text_info': admin.VERTICAL}
     filter_horizontal = ('list_link', 'catalog', 'page', 'blogs', 'galleries')
@@ -43,7 +43,7 @@ class FooterAdmin(DefaultSettings):
 
 @admin.register(SocialNetwork)
 class SocialNetworkAdmin(ImageAdmin):
-    menu_title = '3.Соц.сети'
+    menu_title = 'Соц.сети'
     menu_group = 'Настройки'
     search_fields = ('title', 'image_title')
     list_display = ('get_thumbnail_html', 'title', 'html_link', 'url')
@@ -54,9 +54,9 @@ class SocialNetworkAdmin(ImageAdmin):
 
 @admin.register(SettingsTemplate)
 class SettingsTemplateAdmin(DefaultSettings):
-    menu_title = '1.Настройка шаблона'
+    menu_title = 'Настройка шаблона'
     menu_group = 'Настройки'
-    # filter_horizontal = ('footer',)
+
     search_fields = ('title',)
     fields = (
         'site',
