@@ -1,4 +1,4 @@
-# PyAp - движок, с открытым исходным кодом для разработки веб-приложений, корпоративных сайтов.
+# PyAp - движок с открытым исходным кодом для разработки веб-приложений и корпоративных сайтов.
 
 Технологии: Python 3.x, Django<=1.11, Postgres*. 
 Разработчикам - движок сократит много недель. 
@@ -43,14 +43,13 @@
 - `theme`
 
 
-
 Ставим виртуальное окружение. Активируем.
 
 	virtualenv --python=python3 venv
 	source venv/bin/activate
 
 
-Устанавливаем Джанго и все необходимые зависимости. Входим в папку где лежит файл `manage.py`.
+Устанавливаем Django и все необходимые зависимости. Входим в папку где лежит файл `manage.py`.
 	
 	 cd pyap/
 	 pip install -r requirements.txt
@@ -91,10 +90,10 @@
 
 ### Заполнить проект текстовыми данными (фикстуры).
 
- 	#[!] Эти команды применить раза 2/3. Если будут ошибки
+    #[!] Эти команды применить раза 2-3. Если будут ошибки
  	
-  	python manage.py loaddata users/fixtures/init.json
-  	python manage.py loaddata home/fixtures/init.json
+    python manage.py loaddata users/fixtures/init.json
+    python manage.py loaddata home/fixtures/init.json
     python manage.py loaddata site_info/fixtures/init.json
     python manage.py loaddata settings_template/fixtures/init.json
     python manage.py loaddata include_area/fixtures/init.json
