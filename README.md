@@ -23,7 +23,7 @@
     python manage.py migrate
     python manage.py runserver 
 
-[Смотрим](http://localhos:8000). 
+[Смотрим](http://localhost:8000). 
 
 -------------------------------------------------
 
