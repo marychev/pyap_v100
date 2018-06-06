@@ -7,9 +7,6 @@
 // обработка событий
 // сменить выбранную позицию товара
 $('input[name=product_item]').on('change', function () {
-
-    console.log(123)
-
     $('#productId').val($(this).val());
 });
 

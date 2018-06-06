@@ -3,24 +3,24 @@
 Технологии: Python 3.x, Django<=1.11, Postgres*. 
 Разработчикам - движок сократит много недель. 
 Административная панель на русском. 
+
 *Pyap* легко расширять, изменять бизнес логику. 
 
 В качестве шаблона был взят бесплатный шаблон интернет магазина.
+
 [Спасибо Bootstrap! и OBAJU E-COMMERCE TEMPLATE!](https://bootstrapious.com/p/obaju-e-commerce-template). 
+
  
 --------------------------------------------------
 ### Быстрая установка и клонирование движка.
 
-    git clone https://github.com/marychev/pyap_v100.git
+    git clone git@bitbucket.org:marychev/pyap_v100.git    
     cd pyap_v100
     virtualenv --python=python3 venv
     source venv/bin/activate
     
     cd pyap
     pip install -r requirements.txt
-    
-    python manage.py collectstatic --noinput
-    python manage.py migrate
     python manage.py runserver 
 
 [Смотрим](http://localhos:8000). 
@@ -34,7 +34,7 @@
 
 Клонировать себе проект.
     
-    git clone https://github.com/marychev/pyap_v100.git
+    git@bitbucket.org:marychev/pyap_v100.git
     cd pyap_v100
     
 Проверяем `ls`. Должны быть следующие директории: 

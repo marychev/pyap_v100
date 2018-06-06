@@ -14,7 +14,7 @@ SECRET_KEY = 'hph53g@p+i@q0me76#v)+6p&(xcc!)@e=oi8oum)lo_k1_pyap'
 DEBUG = True
 
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['free-shop.pyap.ru', 'localhost']
 
 
 INSTALLED_APPS = [
