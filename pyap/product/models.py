@@ -36,7 +36,7 @@ class Product(ABSContentModel):
         """Удаление объекта и связаных с ним изображений"""
         if ProductImage.objects.filter(product=self).first():
             [image.delete() for image in ProductImage.objects.filter(product=self)]
-        if self.get_main_item():
+        if self.get_main_image():
             self.get_main_image().image.delete()
         super(Product, self).delete(*args, **kwargs)
 

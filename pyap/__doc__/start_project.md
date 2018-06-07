@@ -65,11 +65,12 @@
     python manage.py loaddata advertising/fixtures/init.json
     python manage.py loaddata gallery/fixtures/init.json
     python manage.py loaddata catalog/fixtures/init.json
-    python manage.py loaddata product/fixtures/init.json
     python manage.py loaddata page/fixtures/init.json
     python manage.py loaddata blog/fixtures/init.json
-    
     python manage.py loaddata menu/fixtures/init.json
+    
+    python manage.py loaddata product/fixtures/init.json
+
     python manage.py loaddata order/fixtures/init.json
 
 

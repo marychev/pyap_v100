@@ -19,14 +19,14 @@
                 </ul>
             </div>
 
+            {% if object.tags.exists %}
             <div class="panel-heading"><h3 class="panel-title">Тэги</h3></div>
             <p class="panel-body">
-            {% if object.tags.exists %}
                 {% for tag in object.tags.iterator %}
                     <a href="?tag={{ tag.id }}" class="{% if request.GET.tag == tag.id|lower %} btn-primary{% endif %} tag btn btn-sm btn-default">{{ tag }}</a>
                 {% endfor %}
-            {% endif %}
             </div>
+            {% endif %}
         </div>
 
 {#            <div class="panel panel-default sidebar-menu">#}

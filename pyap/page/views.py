@@ -13,7 +13,7 @@ class PageView(MainPageMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(PageView, self).get_context_data(**kwargs)
-        context['object'] = get_object_or_404(Page, slug=context['slug'])
+        context['object'] = get_object_or_404(Page, slug=context['slug'], is_show=True)
         initial = {
             'obj': context['object'],
             'request': self.request,

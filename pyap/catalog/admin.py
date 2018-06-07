@@ -18,7 +18,7 @@ class CatalogAdmin(ABSMPTTContentSeoAdmin):
     menu_group = "Каталог"
 
     inlines = (CatalogImageInline,)
-    action = (ABSMPTTContentSeoAdmin.abs_actions,)
+    actions = ABSMPTTContentSeoAdmin.abs_actions
     raw_id_fields = ABSMPTTContentSeoAdmin.abs_raw_id_fields
     filter_horizontal = ('tags',)
     readonly_fields = ABSMPTTContentSeoAdmin.abs_readonly_fields
@@ -28,7 +28,6 @@ class CatalogAdmin(ABSMPTTContentSeoAdmin):
     list_display_links = ABSMPTTContentSeoAdmin.abs_list_display_links
     list_editable = ABSMPTTContentSeoAdmin.abs_list_editable
     fieldsets = ABSMPTTContentSeoAdmin.abs_fieldsets
-
 
     # TODO: create this method!
     # actions = ('clone_object',)
