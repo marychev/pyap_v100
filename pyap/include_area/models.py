@@ -1,6 +1,6 @@
 from django.db import models
 from filebrowser.fields import FileBrowseField
-from utils.help_text import SORT_HT, IA_CODE_HT
+from utils.help_text import SORT_HT, IA_CODE_HT, URL_HT
 
 
 class IncludeArea(models.Model):
@@ -21,6 +21,7 @@ class IncludeArea(models.Model):
     html_code = models.CharField(max_length=255, verbose_name='HTML-код', blank=True, null=True, help_text='HTML разметка с CSS')
     code = models.CharField(max_length=20, choices=CODE_CHOICES, default=ADVANTAGES, verbose_name="Код", help_text=IA_CODE_HT)
     sort = models.PositiveSmallIntegerField(default=1000, verbose_name='Сортировка', help_text=SORT_HT)
+    url = models.URLField('Полный путь к веб-странице', null=True, blank=True, help_text=URL_HT)
 
     def __str__(self):
         return self.title

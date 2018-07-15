@@ -8,10 +8,10 @@
 
 1. Создание виртуального окружения. Windows.
 ---------------------------------------------------------------------------------------
-pip install virtualenv 				- Установка утилиты
-cd /D E:/ 							- Перейти в раздел (Е)
-virtualenv nameproject_venv 		- Создания виртуального окружения в дериктории/папке E:
-nameproject_venv\Scripts\activate 	- Активация виртуального окружения (\deactivate - деактивация)
+pip install virtualenv 					- Установка утилиты
+cd /D E:/ 								- Перейти в раздел (Е)
+virtualenv nameproject_venv 			- Создания виртуального окружения в дериктории/папке E:
+. nameproject_venv\Scripts\activate 	- Активация виртуального окружения (\deactivate - деактивация)
 
 
 

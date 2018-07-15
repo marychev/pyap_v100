@@ -88,6 +88,9 @@ class Product(ABSContentModel):
         """
         return ProductImage.objects.filter(product_id=self.id)
     # -----------------------------------------------------------------------------------
+    
+    def get_comments(self):
+        return ProductComment.objects.filter(product_id=self.id, is_show=True)
 
     class Meta:
         verbose_name = 'товар'

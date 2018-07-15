@@ -106,6 +106,10 @@ class Post(ABSContentModel):
         """
         return PostImage.objects.filter(post_id=self.id)
     # -----------------------------------------------------------------------------------
+    
+    def get_comments(self):
+        qs = Comment.objects.filter(post_id=self.id)
+        return qs
 
     def get_absolute_url(self):
         kwargs = {
